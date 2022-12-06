@@ -1,0 +1,267 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+
+.formWrapper {
+  margin: 2em;
+}
+
+.formWrapper__form {
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+  border: 2px solid $ternaryFontColor;
+  border-radius: 8px;
+  padding: 4em;
+}
+
+.formWrapper__form__titleWrapper__title {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 25px;
+  }
+  @media (max-width: $breakpointMobile) {
+    font-size: 25px;
+  }
+  color: $ternaryFontColor;
+  font-size: 35px;
+  font-weight: 700;
+  filter: $dropShadow;
+  text-transform: uppercase;
+}
+
+.formWrapper__form__inputWrapper {
+  @media (max-width: $breakpointTablet) {
+    flex-flow: row;
+  }
+  @media (max-width: $breakpointMobile) {
+    align-items: center;
+    flex-flow: column;
+  }
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.formWrapper__form__inputWrapper__inputs {
+  @include contactInputs;
+}
+
+.formWrapper__form__inputWrapper__label {
+  color: $ternaryFontColor;
+  position: absolute;
+  left: 5%;
+  transition: All 200ms ease;
+  pointer-events: none;
+}
+
+.firstNameInput {
+  &:focus {
+    & + .firstNameLabel {
+      position: absolute;
+      top: -5%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+  }
+}
+
+.firstNameLabel {
+  top: 4%;
+}
+
+.firstNameLabel--active {
+  position: absolute;
+  top: -5%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.lastNameInput {
+  &:focus {
+    & + .lastNameLabel {
+      position: absolute;
+      top: 13%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+  }
+}
+
+.lastNameLabel {
+  top: 21.5%;
+}
+
+.lastNameLabel--active {
+  position: absolute;
+  top: 13%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.emailInput {
+  &:focus {
+    & + .emailLabel {
+      position: absolute;
+      top: 31%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+    & + .loginEmailLabel {
+      position: absolute;
+      top: -15%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+  }
+}
+
+.emailLabel {
+  top: 39.5%;
+}
+
+.emailLabel--active {
+  position: absolute;
+  top: 31%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.loginEmailLabel {
+  top: 14%;
+}
+
+.loginEmailLabel--active {
+  position: absolute;
+  top: -15%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.phoneNumberInput {
+  &:focus {
+    & + .phoneNumberLabel {
+      position: absolute;
+      top: 48.5%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+  }
+}
+
+.phoneNumberLabel {
+  top: 57%;
+}
+
+.phoneNumberLabel--active {
+  position: absolute;
+  top: 48.5%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.passwordInput {
+  &:focus {
+    & + .passwordLabel {
+      position: absolute;
+      top: 66.5%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+    & + .loginPasswordLabel {
+      position: absolute;
+      top: 46%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+  }
+}
+
+.passwordLabel {
+  top: 74.5%;
+}
+
+.passwordLabel--active {
+  position: absolute;
+  top: 66.5%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.loginPasswordLabel {
+  top: 73.5%;
+}
+
+.loginPasswordLabel--active {
+  position: absolute;
+  top: 46%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.confirmPasswordInput {
+  &:focus {
+    & + .confirmPasswordLabel {
+      position: absolute;
+      top: 84%;
+      left: 1%;
+      transition: All 200ms ease;
+    }
+  }
+}
+
+.confirmPasswordLabel {
+  top: 92.5%;
+}
+
+.confirmPasswordLabel--active {
+  position: absolute;
+  top: 84%;
+  left: 1%;
+  transition: All 200ms ease;
+}
+
+.formWrapper__form__errorMessageWrapper {
+  margin: auto;
+  text-align: center;
+  width: 250px;
+}
+
+.formWrapper__form__errorMessageWrapper__passwordSignUp {
+  color: $errorFontColor;
+  font-style: italic;
+  text-transform: capitalize;
+  width: 100%;
+}
+
+.formWrapper__form__errorMessageWrapper__errorMessage {
+  color: $errorFontColor;
+  width: 100%;
+}
+
+.formWrapper__form__buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formWrapper__form__buttonWrapper__btn {
+  @include submitButton;
+  &:disabled {
+    background: $disabledButton;
+    cursor: unset;
+    transform: unset;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+}
+
+.ng-valid[required] {
+  transition: All 100ms ease-out;
+  border-bottom: 5px solid #42a948;
+}
+.ng-invalid:not(form) {
+  transition: All 100ms ease-out;
+  border-bottom: 5px solid $errorFontColor;
+}

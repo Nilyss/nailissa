@@ -1,0 +1,167 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+
+body {
+  overflow-x: hidden;
+}
+
+.footerWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.footerWrapper__form {
+  width: 800px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 2px solid $ternaryFontColor;
+  padding: 2em;
+  border-radius: 4px;
+  filter: $dropShadow;
+}
+
+.footerWrapper__form__titleWrapper__title {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 25px;
+  }
+  @media (max-width: $breakpointMobile) {
+    font-size: 25px;
+  }
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: $ternaryFontColor;
+  font-size: 35px;
+  font-weight: 700;
+  filter: $dropShadow;
+  text-transform: uppercase;
+  &:after {
+    content: '';
+    width: 75%;
+    height: 0.1em;
+    background: $ternaryFontColor;
+    position: absolute;
+    bottom: -0.3em;
+    margin: auto;
+    border-radius: 8px;
+  }
+}
+
+.footerWrapper__form__list {
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+  width: 75%;
+}
+
+.footerWrapper__form__list__elements {
+  list-style: none;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: space-between;
+  filter: $dropShadow;
+}
+
+.footerWrapper__form__list__elements__sublist {
+  margin-top: 1em;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.3em;
+  width: 100%;
+}
+
+.footerWrapper__form__list__elements__sublist__elements {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.elementLabel {
+  font-weight: 700;
+  font-size: 20px;
+  color: $ternaryFontColor;
+  display: flex;
+  gap: 0.3em;
+}
+
+.elementIcon {
+  font-size: 25px;
+}
+
+.elementLabel--sublist {
+  font-weight: 700;
+  font-size: 16px;
+  color: $ternaryFontColor;
+}
+
+.elementContent {
+  font-size: 18px;
+}
+
+.elementContent--sublist {
+  font-size: 15px;
+}
+
+.capitalise {
+  text-transform: capitalize;
+}
+
+// ********** inputs **********
+.footerWrapper__form__list__elements__sublist__elements__inputs {
+  width: 50%;
+  padding: 0.3em;
+  &:focus {
+    outline: none;
+  }
+}
+
+// ********** Buttons **********
+
+.footerWrapper__form__buttonWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+.footerWrapper__form__buttonWrapper__buttons {
+  @include submitButton;
+}
+
+.validate {
+  &:disabled {
+    background: $disabledButton;
+    cursor: unset;
+    transform: unset;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+}
+
+.edit {
+  background: $disabledButton;
+  &:focus {
+    box-shadow: unset;
+  }
+}
+
+.cancel {
+  background: $errorFontColor;
+  &:focus {
+    box-shadow: unset;
+  }
+}

@@ -1,0 +1,31 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+@import '../../utils/styles/keyframes';
+
+.loader {
+  animation: loaderDuration 3s linear forwards;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  &:before {
+    animation: loaderDuration--background 3s linear forwards;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: $primaryFontColor;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.loader__lottie {
+  animation: loaderDuration 2.7s linear forwards;
+  width: 600px;
+  margin: auto;
+  margin-top: 5%;
+}

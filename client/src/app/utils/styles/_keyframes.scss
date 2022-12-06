@@ -1,0 +1,84 @@
+@keyframes loaderDotsInitialPosition {
+  0%,
+  31% {
+    background-position: 50% 0, 100% 0;
+  }
+
+  33% {
+    background-position: 50% 100%, 100% 0;
+  }
+
+  43%,
+  64% {
+    background-position: 50% 0, 100% 0;
+  }
+
+  66% {
+    background-position: 50% 0, 100% 100%;
+  }
+
+  79% {
+    background-position: 50% 0, 100% 0;
+  }
+
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+@keyframes loaderDotsMoveLeft {
+  100% {
+    left: calc(100% + 12.3px);
+  }
+}
+
+@keyframes loaderDotsJumpTop {
+  100% {
+    top: -0.26px;
+  }
+}
+
+@keyframes loaderDuration {
+  0% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes loaderDuration--background {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes loaderHideScroll {
+  0% {
+    overflow-y: hidden;
+  }
+  99.9% {
+    overflow-y: hidden;
+  }
+  100% {
+    overflow-y: unset;
+  }
+}
+
+@keyframes showHomeNavModal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

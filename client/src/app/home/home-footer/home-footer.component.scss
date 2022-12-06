@@ -1,0 +1,186 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+
+.footerWrapper {
+  @media (max-width: $breakpointTablet) {
+    padding: 2em;
+  }
+  background: $secondaryBackgroundColor;
+  padding: 5em;
+}
+
+.footerWrapper__body {
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+    gap: 4em;
+  }
+  display: flex;
+  align-items: center;
+}
+
+// ********** Left Side **********
+
+.footerWrapper__body__leftSide {
+  @media (max-width: $breakpointTablet) {
+    gap: 1em;
+  }
+  @media (max-width: $breakpointMobile) {
+    width: 100%;
+  }
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  gap: 3em;
+}
+
+.footerWrapper__body__leftSide__branding {
+  display: flex;
+  align-items: center;
+}
+
+.footerWrapper__body__leftSide__branding__logoWrapper {
+  @media (max-width: $breakpointMobile) {
+    margin-right: unset;
+  }
+  width: 100px;
+  display: flex;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.footerWrapper__body__leftSide__branding__logoWrapper__logo {
+  width: 100%;
+  filter: $dropShadow--light;
+}
+
+.footerWrapper__body__leftSide__branding__brandingName {
+  color: $ternaryFontColor;
+  font-family: 'Parisienne', 'sans-serif';
+  filter: $dropShadow--light;
+  font-size: 45px;
+  cursor: pointer;
+}
+
+.footerWrapper__body__leftSide__branding__brandingName--secondColor {
+  color: $primaryFontColor;
+  font-family: 'Parisienne', 'sans-serif';
+  filter: $dropShadow--light;
+  font-size: 45px;
+  cursor: pointer;
+}
+
+.footerWrapper__body__leftSide__overview {
+  @media (max-width: $breakpointLaptop) {
+    width: 300px;
+    line-height: 25px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 12px;
+  }
+  @media (max-width: $breakpointMobile) {
+    width: 100%;
+    text-align: center;
+  }
+  color: $primaryFontColor;
+  width: 500px;
+}
+
+// ********** Right Side **********
+
+.footerWrapper__body__rightSide__nav {
+  @media (max-width: $breakpointLaptop) {
+    gap: 1em;
+  }
+  @media (max-width: $breakpointMobile) {
+    flex-flow: wrap;
+    justify-content: center;
+  }
+  display: flex;
+  gap: 3em;
+}
+
+.footerWrapper__body__rightSide__nav__listWrapper {
+  @media(max-width: $breakpointMobile) {
+gap: .5em;
+  }
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+}
+
+.footerWrapper__body__rightSide__nav__listWrapper__title {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 18px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 16px;
+  }
+  @media (max-width: $breakpointMobile) {
+    margin-top: 1em;
+  }
+  color: $ternaryFontColor;
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.footerWrapper__body__rightSide__nav__listWrapper__title__ul {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.footerWrapper__body__rightSide__nav__listWrapper__title__ul__elements {
+  @media (max-width: $breakpointTablet) {
+    font-size: 12px;
+  }
+  color: white;
+  list-style: none;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+// ********** footer **********
+
+.footerWrapper__footer {
+  background: $disabledButton;
+}
+
+.footerWrapper__footer__ul {
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column wrap;
+    width: 100%;
+    gap: unset;
+    text-align: center;
+    justify-content: unset;
+  }
+  display: flex;
+  justify-content: space-around;
+  gap: 2em;
+}
+
+.footerWrapper__footer__ul__elements {
+  @media (max-width: $breakpointTablet) {
+    font-size: 12px;
+  }
+  @media (max-width: $breakpointMobile) {
+    padding: 1em;
+  }
+  list-style: none;
+  font-size: 16px;
+  padding: 2em;
+  color: $primaryFontColor;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.footerWrapper__footer__ul__elements--link {
+  color: #36dcb8;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

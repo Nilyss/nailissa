@@ -1,0 +1,174 @@
+<article id="contacts" class="article">
+  <!-- ********** LEFT SIDE ********** -->
+
+  <div
+    class="article__leftWrapper"
+    data-aos="fade-down-right"
+    data-aos-duration="500"
+    data-aos-easing="ease-out"
+    data-aos-offset="250"
+  >
+    <div class="article__leftWrapper__titleWrapper">
+      <p class="article__leftWrapper__titleWrapper__subtitle">
+        {{ leftSubtitle }}
+      </p>
+      <h2 class="article__leftWrapper__titleWrapper__title">{{ leftTitle }}</h2>
+    </div>
+    <p class="article__leftWrapper__overview">{{ overview }}</p>
+    <ul class="article__leftWrapper__listWrapper">
+      <li class="article__leftWrapper__listWrapper__contact">
+        <figure class="article__leftWrapper__listWrapper__contact__iconWrapper">
+          <img
+            [src]="phoneCallIcon"
+            alt="phone call icon"
+            class="article__leftWrapper__listWrapper__contact__iconWrapper__logo"
+          />
+        </figure>
+        <a
+          class="article__leftWrapper__listWrapper__contact__link"
+          href="tel: +33666327763"
+          title="Ligne direct"
+        >
+          {{ phoneNumber }}
+        </a>
+      </li>
+      <li class="article__leftWrapper__listWrapper__contact">
+        <figure class="article__leftWrapper__listWrapper__contact__iconWrapper">
+          <img
+            [src]="whatsappIcon"
+            alt="phone call icon"
+            class="article__leftWrapper__listWrapper__contact__iconWrapper__logo"
+          />
+        </figure>
+        <a
+          class="article__leftWrapper__listWrapper__contact__link"
+          href="https://wa.me/0666327763"
+          title="Contacter sur What's app"
+        >
+          {{ phoneNumber }}
+        </a>
+      </li>
+      <li class="article__leftWrapper__listWrapper__contact">
+        <figure class="article__leftWrapper__listWrapper__contact__iconWrapper">
+          <img
+            [src]="emailIcon"
+            alt="phone call icon"
+            class="article__leftWrapper__listWrapper__contact__iconWrapper__logo"
+          />
+        </figure>
+        <a
+          class="article__leftWrapper__listWrapper__contact__link"
+          href="mailto: contact@nailissa.fr"
+          title="Envoyer un mail"
+        >
+          {{ emailAddress }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ********** RIGHT SIDE ********** -->
+
+  <div
+    class="article__rightWrapper"
+    data-aos="fade-up-left"
+    data-aos-duration="500"
+    data-aos-easing="ease-out"
+    data-aos-offset="700"
+  >
+    <form
+      #sendContactForm="ngForm"
+      (ngSubmit)="sendEmail($event)"
+      class="article__rightWrapper__from"
+    >
+      <h2 class="article__rightWrapper__from__title">Formulaire de contact</h2>
+      <div class="article__rightWrapper__from__inputsWrapper">
+        <input
+          id="contactName"
+          pattern="^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$"
+          name="contactName"
+          [(ngModel)]="contactNameInput"
+          #contactName="ngModel"
+          required
+          type="text"
+          class="article__rightWrapper__from__inputsWrapper__name"
+        />
+        <label
+          for="contactName"
+          class="article__rightWrapper__from__inputsWrapper__name--label label"
+          [ngClass]="{
+            'article__rightWrapper__from__inputsWrapper__name--label--active':
+              contactNameInput.length > 0
+          }"
+          >{{ contactLabelNameLabel }}</label
+        >
+        <div class="article__rightWrapper__from__inputsWrapper__coordinate">
+          <input
+            id="contactPhone"
+            pattern="(0|\\+33|0033)[1-9][0-9]{8}"
+            name="contactPhone"
+            [(ngModel)]="contactPhoneInput"
+            #contactPhone="ngModel"
+            required
+            class="article__rightWrapper__from__inputsWrapper__coordinate__phone"
+            type="tel"
+          />
+          <label
+            for="contactPhone"
+            [ngClass]="{
+              'article__rightWrapper__from__inputsWrapper__coordinate__phone--label--active':
+                contactPhoneInput.length > 0
+            }"
+            class="article__rightWrapper__from__inputsWrapper__coordinate__phone--label label"
+            >{{ contactPhoneLabel }}</label
+          >
+          <input
+            id="contactEmail"
+            pattern="^((\w\w+)[.\-]?)+@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
+            name="contactEmail"
+            [(ngModel)]="contactEmailInput"
+            #contactEmail="ngModel"
+            required
+            class="article__rightWrapper__from__inputsWrapper__coordinate__email"
+            type="email"
+          />
+          <label
+            for="contactEmail"
+            [ngClass]="{
+              'article__rightWrapper__from__inputsWrapper__coordinate__email--label--active':
+                contactEmailInput.length > 0
+            }"
+            class="article__rightWrapper__from__inputsWrapper__coordinate__email--label label"
+            >{{ contactMailLabel }}</label
+          >
+        </div>
+        <textarea
+          id="contactMessage"
+          name="contactMessage"
+          [(ngModel)]="contactMessageInput"
+          #contactMessage="ngModel"
+          required
+          class="article__rightWrapper__from__inputsWrapper__textArea"
+        ></textarea>
+        <label
+          for="contactMessage"
+          [ngClass]="{
+            'article__rightWrapper__from__inputsWrapper__textArea--label--active':
+              contactMessageInput.length > 0
+          }"
+          class="article__rightWrapper__from__inputsWrapper__textArea--label label"
+          >{{ contactMessageLabel }}</label
+        >
+        <div class="article__rightWrapper__from__inputsWrapper__buttonWrapper">
+          <button
+            type="submit"
+            [disabled]="!sendContactForm.form.valid"
+            class="article__rightWrapper__from__inputsWrapper__buttonWrapper__button"
+          >
+            {{ submitButton }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</article>

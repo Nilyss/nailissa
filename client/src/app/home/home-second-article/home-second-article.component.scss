@@ -1,0 +1,143 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+
+.article {
+  @media (max-width: $breakpointMobile) {
+    padding: 2em;
+  }
+  padding: 6em;
+  display: flex;
+  flex-flow: column;
+  gap: 5em;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.article__titleWrapper {
+  @media (max-width: $breakpointMobile) {
+    align-items: unset;
+  }
+  text-transform: uppercase;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.article__titleWrapper__subtitle {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 16px;
+  }
+  color: $secondaryFontColor;
+  font-size: 23px;
+  filter: $dropShadow;
+}
+
+.article__titleWrapper__title {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 25px;
+  }
+  color: $ternaryFontColor;
+  font-size: 35px;
+  font-weight: 700;
+  filter: $dropShadow;
+}
+
+// ********** cards **********
+
+.article__modalWrapper {
+  @media (max-width: $breakpointMobile) {
+    position: sticky;
+    top: 25%;
+  }
+  width: 100%;
+  position: absolute;
+  top: 35%;
+  left: 0;
+  z-index: 999;
+}
+
+.article__cardsWrapper {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  gap: 3em;
+  filter: $dropShadow;
+}
+
+.article__cardsWrapper__cards {
+  @media (max-width: $breakpointLaptop) {
+    width: 25%;
+  }
+  @media (max-width: $breakpointTablet) {
+    width: 30%;
+  }
+  @media (max-width: $breakpointMobile) {
+    width: 100%;
+  }
+  list-style: none;
+  width: 20%;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+  background: $ternaryBackgroundColor;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border-radius: 8px;
+  padding: 2em 0 2em 0;
+  transition: All 300ms ease-out;
+  cursor: pointer;
+  &:hover {
+    transition: All 300ms ease-out;
+    transform: scale(1.1);
+    background: #ffffff;
+  }
+}
+
+.article__cardsWrapper__cards__textWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.article__cardsWrapper__cards__textWrapper__name {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 18px;
+  }
+  color: $ternaryFontColor;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.article__cardsWrapper__cards__textWrapper__overview {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 14px;
+  }
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 1em;
+}
+
+.article__cardsWrapper__cards__price {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.article__cardsWrapper__cards__orderWrapper {
+  @media (max-width: $breakpointMobile) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  width: 75%;
+  margin: auto;
+}
+
+.article__cardsWrapper__cards__orderWrapper__order {
+  @include submitButton;
+}

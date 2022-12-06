@@ -1,0 +1,234 @@
+@import './variables';
+
+@mixin submitButton {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 16px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 14px;
+    padding: 1em;
+    height: 3.5em;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    $quaternaryFontColor 0,
+    $ternaryFontColor 100%
+  );
+  border: none;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  color: $primaryFontColor;
+  transition: box-shadow 0.15s, transform 0.15s;
+  height: 2em;
+  padding: 1.5em;
+  cursor: pointer;
+  &:focus {
+    box-shadow: $quaternaryFontColor 0 0 0 1.5px inset,
+      rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+      $quaternaryFontColor 0 -3px 0 inset;
+  }
+  &:hover {
+    background-image: radial-gradient(
+      100% 100% at 100% 0,
+      #e3c39f 0,
+      #daab8c 100%
+    );
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+      rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $quaternaryFontColor 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+  &:active {
+    box-shadow: $quaternaryFontColor 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+}
+
+@mixin submitButton--disable {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 16px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 14px;
+    padding: 1em;
+    height: 3.5em;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background: $disabledButton;
+  border: none;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+  rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  color: $primaryFontColor;
+  transition: box-shadow 0.15s, transform 0.15s;
+  height: 2em;
+  padding: 1.5em;
+  cursor: pointer;
+  &:focus {
+    box-shadow: $quaternaryFontColor 0 0 0 1.5px inset,
+    rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+    $quaternaryFontColor 0 -3px 0 inset;
+  }
+  &:hover {
+    background: rgba(115, 115, 115, 0.65);
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+@mixin submitButton--alt {
+  @media (max-width: $breakpointTablet) {
+    font-size: 14px;
+    padding: 5px;
+  }
+  font-size: 16px;
+  font-weight: 600;
+  color: $primaryFontColor;
+  align-items: center;
+  background-color: $secondaryBackgroundColor;
+  border-radius: 4px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  line-height: 24px;
+  width: 150px;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    outline: 0;
+  }
+  &::after {
+    @media (max-width: $breakpointTablet) {
+      height: 30px;
+    }
+    content: '';
+    background-color: rgba(20, 20, 20, 0.37);
+    border-radius: 4px;
+    display: block;
+    height: 40px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: 3px;
+    transform: translate(8px, 8px);
+    transition: transform 200ms ease-out;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    transform: translate(0, 0);
+  }
+
+  &:active::after {
+    outline: 0;
+  }
+}
+
+@mixin contactInputs {
+  height: 60px;
+  padding-left: 1em;
+  font-size: 16px;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin contactInputs--alt {
+  height: 60px;
+  padding-left: 1em;
+  font-size: 16px;
+  width: 48%;
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin timePickingButton {
+  @media (max-width: $breakpointTablet) {
+    font-size: 14px;
+    padding: 5px;
+  }
+  font-size: 22px;
+  font-weight: 600;
+  color: $primaryFontColor;
+  align-items: center;
+  background-color: $secondaryBackgroundColor;
+  border-radius: 4px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  line-height: 24px;
+  width: 150px;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    outline: 0;
+  }
+  &::after {
+    @media (max-width: $breakpointTablet) {
+      height: 30px;
+    }
+    content: '';
+    background-color: rgba(20, 20, 20, 0.37);
+    border-radius: 4px;
+    display: block;
+    height: 40px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: 3px;
+    transform: translate(10px, 10px);
+    transition: transform 200ms ease-out;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    transform: translate(0, 0);
+  }
+
+  &:active::after {
+    outline: 0;
+  }
+}
+
+@mixin timePickingButton--selected {
+  @media (max-width: $breakpointMobile) {
+    font-size: 14px;
+    padding: 5px;
+  }
+  font-size: 22px;
+  color: $primaryFontColor;
+  background: rgba(20, 20, 20, 0.37);
+  border: none;
+  display: flex;
+  justify-content: center;
+  line-height: 24px;
+  width: 150px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: rgba(78, 81, 102, 0.72) 3px 3px 6px 0 inset,
+    rgba(78, 81, 102, 0.07) -3px -3px 6px 1px inset;
+  cursor: pointer;
+  &:after {
+    display: none;
+  }
+}

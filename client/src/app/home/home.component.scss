@@ -1,0 +1,9 @@
+@import '../utils/styles/variables';
+@import '../utils/styles/keyframes';
+.body {
+  @media (max-width: $breakpointMobile) {
+    overflow-x: unset;
+  }
+  animation: loaderHideScroll 2.5ms forwards;
+  overflow-x: hidden;
+}

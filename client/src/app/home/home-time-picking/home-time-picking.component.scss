@@ -1,0 +1,114 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+
+.timePickingModal {
+  @media (max-width: $breakpointLaptop) {
+    width: 75%;
+  }
+  @media (max-width: $breakpointTablet) {
+    width: 85%;
+  }
+  @media (max-width: $breakpointMobile) {
+    width: 100%;
+    padding: 0.5em;
+  }
+  margin: auto;
+  width: 60%;
+  background: rgba(91, 91, 91, 0.5);
+  z-index: 999;
+  padding: 2em;
+  border-radius: 8px;
+  pointer-events: all;
+}
+
+.timePickingModal__Wrapper {
+  @media (max-width: $breakpointMobile) {
+    padding: 0.5em;
+  }
+  height: 100%;
+  border-radius: 8px;
+  padding: 2em;
+  background: #f3f3f3;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+}
+
+.timePickingModal__Wrapper__titleWrapper {
+  @media (max-width: $breakpointMobile) {
+    font-size: 18px;
+  }
+  font-size: 28px;
+  color: $ternaryFontColor;
+  filter: $dropShadow;
+  text-align: center;
+}
+
+.timePickingModal__Wrapper__bodyWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+.timePickingModal__Wrapper__bodyWrapper__dateInputWrapper {
+}
+
+.timePickingModal__Wrapper__bodyWrapper__dateInputWrapper__input {
+  @media (max-width: $breakpointMobile) {
+    font-size: 16px;
+  }
+  padding: 0.5em;
+  font-size: 24px;
+  border: 1px solid $secondaryFontColor;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+.timePickingModal__Wrapper__bodyWrapper__timeWrapper {
+}
+
+.timePickingModal__Wrapper__bodyWrapper__timeWrapper__list {
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+  }
+  display: flex;
+  gap: 2em;
+}
+
+.timePickingModal__Wrapper__bodyWrapper__timeWrapper__list__time {
+  list-style: none;
+  @include timePickingButton;
+}
+
+.timePickingModal__Wrapper__bodyWrapper__timeWrapper__list__time.active {
+  list-style: none;
+  @include timePickingButton--selected;
+}
+
+.timePickingModal__Wrapper__bodyWrapper__submitWrapper {
+  @media(max-width: $breakpointMobile) {
+    gap: .5em;
+  }
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+.timePickingModal__Wrapper__bodyWrapper__submitWrapper__button {
+  @include submitButton;
+}
+
+.timePickingModal__Wrapper__bodyWrapper__submitWrapper__button--cancel {
+  @include submitButton--disable;
+}

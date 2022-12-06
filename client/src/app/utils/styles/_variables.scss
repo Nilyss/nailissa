@@ -1,0 +1,23 @@
+$primaryFontColor: #ffffff;
+$secondaryFontColor: #141414;
+$ternaryFontColor: #c8a180ff;
+$quaternaryFontColor: #d9b79aff;
+$errorFontColor: #ff4747;
+
+$primaryBackgroundColor: linear-gradient(
+  180deg,
+  rgba(200, 161, 128, 1) 0%,
+  rgba(217, 183, 154, 1) 100%
+);
+$secondaryBackgroundColor: rgb(20, 20, 20);
+$ternaryBackgroundColor: #f3f3f3;
+$quaternaryBackgroundColor: #936c4b;
+
+$disabledButton: #737373;
+$dropShadow: drop-shadow(20px 10px 4px rgba(20, 20, 20, 0.2));
+$dropShadow--light: drop-shadow(20px 10px 4px rgba(255, 255, 255, 0.2));
+
+// breakpoints
+$breakpointLaptop: 1280px;
+$breakpointTablet: 1024px;
+$breakpointMobile: 768px;

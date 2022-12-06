@@ -1,0 +1,78 @@
+@import '../../../utils/styles/variables';
+@import '../../../utils/styles/mixins';
+@import '../../../utils/styles/keyframes';
+
+.headerUserModal {
+  background: rgba(255,255,255,0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 2px solid $ternaryFontColor;
+  padding: 2em;
+  border-radius: 4px;
+  filter: $dropShadow;
+}
+
+.headerUserModalWrapper__userName {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 28px;
+  font-family: 'Parisienne', 'sans-serif';
+  font-weight: bold;
+  text-transform: capitalize;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  filter: $dropShadow;
+  color: $secondaryBackgroundColor;
+  cursor: default;
+  &:after {
+    content: '';
+    width: 75%;
+    height: .1em;
+    background: $ternaryFontColor;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    border-radius: 8px;
+  }
+}
+
+.headerUserModalWrapper__nav {
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+}
+
+.headerUserModalWrapper__nav__ul {
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+}
+
+.headerUserModalWrapper__nav__ul__link {
+  list-style: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  @include submitButton;
+}
+
+.headerUserModalWrapper__nav__ul__link__icon {
+  font-size: 35px;
+}
+
+.headerUserModalWrapper__nav__buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerUserModalWrapper__nav__buttonWrapper__btn {
+  display: flex;
+  gap: .2em;
+  @include submitButton--alt;
+  font-size: 16px;
+}

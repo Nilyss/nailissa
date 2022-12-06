@@ -1,0 +1,266 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+@import '../../utils/styles/keyframes';
+
+.headerWrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+// ********** top header **********
+
+.headerWrapper__contactWrapper {
+  @media (max-width: $breakpointLaptop) {
+    padding: 0.5em 1em 0.5em 1em;
+    text-align: center;
+  }
+  display: flex;
+  justify-content: space-between;
+  background: $ternaryFontColor;
+  padding: 1em 5em 1em 5em;
+}
+
+.headerWrapper__contactWrapper__list {
+  @media (max-width: $breakpointTablet) {
+    gap: 0.5em;
+  }
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+  }
+  display: flex;
+  gap: 2em;
+}
+
+.headerWrapper__contactWrapper__list__elements {
+  @media (max-width: $breakpointMobile) {
+    font-size: 14px;
+  }
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: $primaryFontColor;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.headerWrapper__contactWrapper__list__elements__iconWrapper {
+  width: 25px;
+}
+
+.headerWrapper__contactWrapper__list__elements__iconWrapper__logo {
+  width: 100%;
+}
+
+.headerWrapper__contactWrapper__list__elements__logoWrapper {
+  @media (max-width: $breakpointMobile) {
+    margin: auto;
+  }
+  width: 25px;
+}
+
+.headerWrapper__contactWrapper__list__elements__logoWrapper__logo {
+  width: 100%;
+  cursor: pointer;
+  filter: $dropShadow;
+}
+
+.headerWrapper__contactWrapper__list__elements__iconWrapper--href {
+  color: $primaryFontColor;
+  text-decoration: unset;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.headerWrapper__contactWrapper__account {
+  display: flex;
+  gap: 1em;
+}
+
+.headerWrapper__contactWrapper__account__buttons {
+  list-style: none;
+}
+
+.headerWrapper__contactWrapper__account__buttons__btn {
+  @include submitButton--alt;
+  max-height: 45px;
+  font-size: 14px;
+}
+
+.headerWrapper__contactWrapper__account__connected {
+  list-style: none;
+  font-size: 16px;
+  color: $primaryFontColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.headerWrapper__contactWrapper__account__connected__userName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  text-transform: capitalize;
+}
+
+.headerWrapper__contactWrapper__account__connected__icon {
+  font-size: 35px;
+}
+
+//********** header body **********
+
+.headerWrapper__navWrapper {
+  @media (max-width: $breakpointTablet) {
+    padding: 2em 1em 2em 1em;
+  }
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+  }
+  display: flex;
+  padding: 3em 2em 3em 2em;
+  justify-content: space-between;
+}
+
+.headerWrapper__navWrapper__branding {
+  @media (max-width: $breakpointTablet) {
+    gap: unset;
+  }
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  cursor: pointer;
+}
+
+.headerWrapper__navWrapper__branding__logoWrapper {
+  @media (max-width: $breakpointLaptop) {
+    width: 75px;
+  }
+  @media (max-width: $breakpointTablet) {
+    width: 65px;
+  }
+  width: 150px;
+  display: flex;
+}
+
+.headerWrapper__navWrapper__branding__logoWrapper__picture {
+  width: 100%;
+  filter: $dropShadow;
+}
+
+.headerWrapper__navWrapper__branding__text {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 45px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 35px;
+  }
+  font-family: 'Parisienne', 'sans-serif';
+  filter: $dropShadow;
+  font-size: 65px;
+  color: $ternaryFontColor;
+}
+
+.headerWrapper__navWrapper__branding__text--secondColor {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 45px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 35px;
+  }
+  font-family: 'Parisienne', 'sans-serif';
+  filter: $dropShadow;
+  font-size: 65px;
+  color: $secondaryFontColor;
+}
+
+.brandingLink {
+  display: flex;
+  align-items: center;
+}
+
+// ********** Navigation **********
+
+.headerWrapper__navWrapper__navigation {
+  @media (max-width: $breakpointLaptop) {
+    gap: 1em;
+  }
+  @media (max-width: $breakpointTablet) {
+    gap: 0.5em;
+  }
+  @media (max-width: $breakpointMobile) {
+    flex-flow: wrap;
+    justify-content: center;
+  }
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.headerWrapper__navWrapper__navigation__link {
+  @media (max-width: $breakpointLaptop) {
+    font-size: 14px;
+  }
+  @media (max-width: $breakpointTablet) {
+    font-size: 12px;
+  }
+  list-style: none;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: $secondaryFontColor;
+  &:hover {
+    color: $ternaryFontColor;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+// ********** button **********
+
+.headerWrapper__navWrapper__branding__buttonWrapper {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.headerWrapper__navWrapper__branding__buttonWrapper__button {
+  @include submitButton;
+}
+
+// ********** User Modal Wrapper **********
+
+.headerWrapper__userModalWrapper {
+  transition: All 200ms ease-out;
+  transform: translateX(300%);
+  position: absolute;
+  top: 18%;
+  right: 4.75%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+}
+
+.headerWrapper__userModalWrapper--active {
+  transition: All 400ms ease-out;
+  transform: translateX(0);
+  position: absolute;
+  top: 18%;
+  right: 4.75%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+}
+
+.headerWrapper__userModalWrapper__icon {
+  font-size: 40px;
+  margin-bottom: -0.4em;
+}

@@ -1,0 +1,52 @@
+<div class="timePickingModal">
+  <div class="timePickingModal__Wrapper">
+    <div class="timePickingModal__Wrapper__titleWrapper">
+      <h3 class="timePickingModal__Wrapper__titleWrapper__title">
+        {{ modalTitle }}
+      </h3>
+    </div>
+    <form
+      #sendDatePickingForm="ngForm"
+      (ngSubmit)="saveDatePicked($event)"
+      class="timePickingModal__Wrapper__bodyWrapper"
+    >
+      <div class="timePickingModal__Wrapper__bodyWrapper__dateInputWrapper">
+        <input
+          id="datePick"
+          name='"datePick'
+          [(ngModel)]="datePickInput"
+          #datePick="ngModel"
+          required
+          class="timePickingModal__Wrapper__bodyWrapper__dateInputWrapper__input"
+          type="date"
+        />
+      </div>
+      <div class="timePickingModal__Wrapper__bodyWrapper__timeWrapper">
+        <ul class="timePickingModal__Wrapper__bodyWrapper__timeWrapper__list">
+          <li
+            *ngFor="let time of getHours; let i = index"
+            [id]="i"
+            class="timePickingModal__Wrapper__bodyWrapper__timeWrapper__list__time"
+            [class.active]="selectedIndex === i"
+            (click)="setIndex(i)"
+          >
+            {{ time }}
+          </li>
+        </ul>
+      </div>
+      <div class="timePickingModal__Wrapper__bodyWrapper__submitWrapper">
+        <button
+          class="timePickingModal__Wrapper__bodyWrapper__submitWrapper__button"
+        >
+          {{ modalSubmitButton }}
+        </button>
+        <button
+          (click)="closeModal()"
+          class="timePickingModal__Wrapper__bodyWrapper__submitWrapper__button--cancel"
+        >
+          {{ modalCancelButton }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
