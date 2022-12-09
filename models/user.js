@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
 
 // email, password, phoneNumber validations
 
@@ -24,6 +25,8 @@ const isValidPhoneNumber = (phoneNumber) => {
     /^(0|\\+33|0033)[1-9][0-9]{8}$/
   return regexPhoneNumber.test(phoneNumber)
 }
+
+const objectId = new ObjectId()
 
 const userSchema = Schema(
   {
@@ -65,6 +68,12 @@ const userSchema = Schema(
       number: String,
       postalCode: String,
       city: String,
+    },
+    bookedDate: {
+      // _id: objectId,
+      day: String,
+      hour: String,
+      provision: String,
     },
   },
   { timeStamp: true }

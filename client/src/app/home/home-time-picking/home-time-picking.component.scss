@@ -14,7 +14,9 @@
   }
   margin: auto;
   width: 60%;
-  background: rgba(91, 91, 91, 0.5);
+  background: rgba(255,255,255,0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   z-index: 999;
   padding: 2em;
   border-radius: 8px;
@@ -28,7 +30,9 @@
   height: 100%;
   border-radius: 8px;
   padding: 2em;
-  background: #f3f3f3;
+  background: rgba(255,255,255,0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -45,6 +49,13 @@
   color: $ternaryFontColor;
   filter: $dropShadow;
   text-align: center;
+}
+
+.timePickingModal__Wrapper__titleWrapper__prestationDuration {
+  font-size: 20px;
+  color: $secondaryFontColor;
+  font-style: italic;
+  margin-top: .5em;
 }
 
 .timePickingModal__Wrapper__bodyWrapper {
@@ -64,7 +75,8 @@
   }
   padding: 0.5em;
   font-size: 24px;
-  border: 1px solid $secondaryFontColor;
+  color: $ternaryFontColor;
+  border: 1px solid $ternaryFontColor;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
   cursor: pointer;

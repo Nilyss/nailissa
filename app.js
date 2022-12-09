@@ -24,7 +24,9 @@ const {
   isValidUser,
 } = require('./middleware/authentication/jsonwebtoken')
 
+// routes
 const userRoutes = require('./routes/user')
+const provisionRoutes = require('./routes/provisions')
 const calendarRoutes = require('./routes/calendar')
 
 //  config
@@ -49,6 +51,7 @@ app
   .get('/api/jwtid', isAccessGranted)
   // Routes
   .use(userRoutes)
+  .use(provisionRoutes)
   .use(calendarRoutes)
 
 // starting app

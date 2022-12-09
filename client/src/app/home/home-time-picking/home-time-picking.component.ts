@@ -4,9 +4,11 @@ import {
   Output,
   OnInit,
   OnDestroy,
+  Input,
 } from '@angular/core'
 import { CalendarService } from '../calendar.service'
 import { Subscription } from 'rxjs'
+import { Provision } from '../provision'
 
 @Component({
   selector: 'app-home-time-picking',
@@ -14,7 +16,17 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./home-time-picking.component.scss'],
 })
 export class HomeTimePickingComponent implements OnInit, OnDestroy {
+  @Input() provisionsData: Provision[]
+  @Input() provisionId: string
   @Output() public modalState = new EventEmitter()
+  provision: {
+    _id: string
+    name: string
+    price: string
+    overview: string
+    image: string
+    time: string
+  }
   isSubscribed: Subscription | undefined
   modalTitle: string = 'Choisissez une date et un créneaux horaire'
   modalSubmitButton: string = 'Valider le rendez-vous'
@@ -24,10 +36,7 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
   datePickInput: Date
   selectedIndex: number = null
   selectedTime: string
-  setIndex(index) {
-    this.selectedIndex = index
-    this.selectedTime = document.getElementById(index).innerText
-  }
+
   data = [
     { property: '14h00' },
     { property: '15h00' },
@@ -36,6 +45,17 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
   ]
 
   getHours = this.data.map((hours) => hours.property)
+
+  // ********** function **********
+  setTimeIndex(index) {
+    this.selectedIndex = index
+    this.selectedTime = document.getElementById(index).innerText
+  }
+  getProvisionDatasById() {
+    this.provisionsData.find((provisions) => {
+      if (provisions._id === this.provisionId) this.provision = provisions
+    })
+  }
 
   closeModal() {
     this.modalState.emit(false)
@@ -46,7 +66,6 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
       date: this.datePickInput,
       time: this.selectedTime,
     }
-    console.log('data =>', data)
     this.isSubscribed = this.calendarService
       .bookingDateRequest(data.date, data.time)
       .subscribe()
@@ -57,7 +76,9 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
 
   constructor(private calendarService: CalendarService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProvisionDatasById()
+  }
   ngOnDestroy() {
     this.isSubscribed?.unsubscribe()
   }

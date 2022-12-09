@@ -12,7 +12,6 @@ export class User {
     postalCode: string
     city: string
   }
-
   constructor(
     _id: string,
     email: string,

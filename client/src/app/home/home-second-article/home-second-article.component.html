@@ -1,6 +1,8 @@
 <article id="prestations" class="article">
   <div class="article__modalWrapper">
     <app-home-time-picking
+      [provisionsData]='provisionsData'
+      [provisionId]='provisionId'
       (modalState)="modalState = $event"
       *ngIf="isModalDisplay && modalState !== false"
     ></app-home-time-picking>
@@ -16,31 +18,42 @@
     <h2 class="article__titleWrapper__title">{{ title }}</h2>
   </div>
   <ul
+    *ngIf="provisionsData"
     class="article__cardsWrapper"
     data-aos="fade-up-right"
     data-aos-duration="500"
     data-aos-easing="ease-out"
-    data-aos-offset="700"
+    data-aos-offset="500"
   >
     <li
-      *ngFor="let prestation of getPrestations"
+      *ngFor="let prestation of provisionsData"
       class="article__cardsWrapper__cards"
     >
+      <figure class="imageWrapper">
+        <img
+          [src]="prestation.image"
+          alt="prestation"
+          class="imageWrapper__image"
+        />
+      </figure>
       <div class="article__cardsWrapper__cards__textWrapper">
         <h3 class="article__cardsWrapper__cards__textWrapper__name">
-          {{ prestation.title }}
+          {{ prestation.name }}
         </h3>
         <p class="article__cardsWrapper__cards__textWrapper__overview">
-          {{ prestation.message }}
+          {{ prestation.overview }}
+        </p>
+        <p class="article__cardsWrapper__cards__textWrapper__time">
+          Durée: {{ prestation.time }}
         </p>
       </div>
       <p class="article__cardsWrapper__cards__price">
-        {{ prestation.price }} €
+        Prix: {{ prestation.price }}
       </p>
       <div class="article__cardsWrapper__cards__orderWrapper">
         <button
           class="article__cardsWrapper__cards__orderWrapper__order"
-          (click)="toggleModal($event)"
+          (click)="toggleModal($event, prestation._id)"
         >
           Planifier un rendez-vous
         </button>

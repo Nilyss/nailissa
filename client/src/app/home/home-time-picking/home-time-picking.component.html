@@ -1,9 +1,24 @@
-<div class="timePickingModal">
+<div
+  class="timePickingModal"
+  data-aos="fade-down-left"
+  data-aos-duration="500"
+  data-aos-easing="ease-out"
+>
   <div class="timePickingModal__Wrapper">
-    <div class="timePickingModal__Wrapper__titleWrapper">
-      <h3 class="timePickingModal__Wrapper__titleWrapper__title">
+    <div
+      class="timePickingModal__Wrapper__titleWrapper"
+    >
+      <h3
+        class="timePickingModal__Wrapper__titleWrapper__title"
+      >
         {{ modalTitle }}
       </h3>
+      <p
+        class="timePickingModal__Wrapper__titleWrapper__prestationName"
+      >
+        {{ provision.name }}
+      </p>
+      <p class='timePickingModal__Wrapper__titleWrapper__prestationDuration'>{{provision.time}} — {{provision.price}}</p>
     </div>
     <form
       #sendDatePickingForm="ngForm"
@@ -28,7 +43,7 @@
             [id]="i"
             class="timePickingModal__Wrapper__bodyWrapper__timeWrapper__list__time"
             [class.active]="selectedIndex === i"
-            (click)="setIndex(i)"
+            (click)="setTimeIndex(i)"
           >
             {{ time }}
           </li>
