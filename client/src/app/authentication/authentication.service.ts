@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { User } from './user'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { tap, catchError, Observable, of } from 'rxjs'
-
+import { BookedDate } from './bookedDate'
 @Injectable({
   providedIn: 'root',
 })
@@ -81,6 +81,38 @@ export class AuthenticationService {
         tap((res) => {
           this.log(`User's datas get updated` + res)
         }),
+        catchError((error) => this.handleError(error, undefined))
+      )
+  }
+
+  editConnectedUserBookedDate(
+    userId: string,
+    data: BookedDate
+  ): Observable<User> {
+    return this.http
+      .put<User>(
+        this.apiBaseUrl + this.userEndpoint + `/booking` + `/${userId}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        tap((res) => {
+          this.log(`User's booked date get updated` + res)
+        }),
+        catchError((error) => this.handleError(error, undefined))
+      )
+  }
+
+  getUserBookedData(userId: string): Observable<BookedDate> {
+    return this.http
+      .get<BookedDate>(
+        this.apiBaseUrl + this.userEndpoint + `/${userId}` + `/booked`,
+        this.httpOptions
+      )
+      .pipe(
+        tap((res) =>
+          this.log(`Booked provision successfully fetched : ${res} `)
+        ),
         catchError((error) => this.handleError(error, undefined))
       )
   }

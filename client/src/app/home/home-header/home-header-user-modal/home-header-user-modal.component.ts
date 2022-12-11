@@ -25,9 +25,14 @@ export class HomeHeaderUserModalComponent implements OnDestroy, OnInit {
     return this.router.navigate(['account/login'])
   }
 
+  goToBookedDate() {
+    return this.router.navigate(['account/Booked'])
+  }
+
   goToProfile() {
     return this.router.navigate(['account/profile'])
   }
+
   constructor(
     private authService: AuthenticationService,
     private router: Router

@@ -7,8 +7,10 @@ import {
   Input,
 } from '@angular/core'
 import { CalendarService } from '../calendar.service'
-import { Subscription } from 'rxjs'
+import { Subscription, switchMap } from 'rxjs'
 import { Provision } from '../provision'
+import { BookedDate } from '../../authentication/bookedDate'
+import { AuthenticationService } from '../../authentication/authentication.service'
 
 @Component({
   selector: 'app-home-time-picking',
@@ -19,14 +21,7 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
   @Input() provisionsData: Provision[]
   @Input() provisionId: string
   @Output() public modalState = new EventEmitter()
-  provision: {
-    _id: string
-    name: string
-    price: string
-    overview: string
-    image: string
-    time: string
-  }
+  provision: BookedDate['provision']
   isSubscribed: Subscription | undefined
   modalTitle: string = 'Choisissez une date et un créneaux horaire'
   modalSubmitButton: string = 'Valider le rendez-vous'
@@ -62,19 +57,30 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
   }
 
   saveDatePicked(event: Event) {
-    const data = {
-      date: this.datePickInput,
-      time: this.selectedTime,
+    const data: BookedDate = {
+      _id: '',
+      day: this.datePickInput,
+      hour: this.selectedTime,
+      provision: this.provision,
     }
-    this.isSubscribed = this.calendarService
-      .bookingDateRequest(data.date, data.time)
-      .subscribe()
 
-    this.modalState.emit(false)
-    alert('Saved Date')
+    this.isSubscribed = this.authService
+      .getConnectedUserId()
+      .pipe(
+        switchMap((userId: string) =>
+          this.authService.editConnectedUserBookedDate(userId, data)
+        )
+      )
+      .subscribe(() => {
+        this.closeModal()
+        alert(`Rendez-vous pris pour le ${data.day} à ${data.hour} !`)
+      })
   }
 
-  constructor(private calendarService: CalendarService) {}
+  constructor(
+    private calendarService: CalendarService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.getProvisionDatasById()
