@@ -1,4 +1,6 @@
-<article id="prestations" class="article">
+<article
+  *ngIf="provisionsData"
+  id="prestations" class="article">
   <div class="article__modalWrapper">
     <app-home-time-picking
       [provisionsData]='provisionsData'
@@ -18,7 +20,6 @@
     <h2 class="article__titleWrapper__title">{{ title }}</h2>
   </div>
   <ul
-    *ngIf="provisionsData"
     class="article__cardsWrapper"
     data-aos="fade-up-right"
     data-aos-duration="500"

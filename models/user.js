@@ -26,8 +26,6 @@ const isValidPhoneNumber = (phoneNumber) => {
   return regexPhoneNumber.test(phoneNumber)
 }
 
-const objectId = new ObjectId()
-
 const userSchema = Schema(
   {
     email: {
@@ -70,10 +68,17 @@ const userSchema = Schema(
       city: String,
     },
     bookedDate: {
-      // _id: objectId,
+      _id: String,
       day: String,
       hour: String,
-      provision: String,
+      provision: {
+        _id: String,
+        name: String,
+        price: String,
+        time: String,
+        overview: String,
+        image: String,
+      },
     },
   },
   { timeStamp: true }
