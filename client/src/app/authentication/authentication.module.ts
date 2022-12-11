@@ -9,17 +9,20 @@ import { HomeModule } from '../home/home.module'
 import { AuthenticationComponent } from './authentication.component'
 import { AuthenticationFormComponent } from './authentication-form/authentication-form.component'
 import { AuthenticationProfileComponent } from './authentication-profile/authentication-profile.component'
+import { AuthenticationBookedDateComponent } from './authentication-booked-date/authentication-booked-date.component'
 
 const authenticationRoutes: Routes = [
   { path: 'account/signup', component: AuthenticationComponent },
   { path: 'account/login', component: AuthenticationComponent },
   { path: 'account/profile', component: AuthenticationProfileComponent },
+  { path: 'account/Booked', component: AuthenticationBookedDateComponent },
 ]
 @NgModule({
   declarations: [
     AuthenticationComponent,
     AuthenticationFormComponent,
     AuthenticationProfileComponent,
+    AuthenticationBookedDateComponent,
   ],
   imports: [
     CommonModule,

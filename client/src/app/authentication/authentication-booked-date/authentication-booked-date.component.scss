@@ -1,0 +1,97 @@
+@import '../../utils/styles/variables';
+@import '../../utils/styles/mixins';
+
+.body {
+  overflow-x: hidden;
+}
+
+.booked {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+}
+
+// ********** title **********
+
+.booked__wrapper__titleWrapper__title {
+  color: $ternaryFontColor;
+  filter: $dropShadow;
+  font-weight: 700;
+  font-size: 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:after {
+    content: '';
+    width: 75%;
+    height: 0.1em;
+    background: $ternaryFontColor;
+    position: absolute;
+    bottom: -10px;
+    margin: auto;
+    border-radius: 8px;
+  }
+}
+
+// ********** lists **********
+
+.booked__wrapper__bodyWrapper {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4em;
+  margin-bottom: 4em;
+}
+
+.list {
+  list-style: none;
+  width: 100%;
+  box-shadow: $boxShadow;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+.list__elements {
+  color: $secondaryFontColor;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list__elements--title {
+  font-size: 18px;
+  font-weight: 700;
+  color: $ternaryFontColor;
+  filter: $dropShadow;
+}
+
+// ********** picture **********
+
+.booked__wrapper__prestationPicture__wrapper {
+  width: 300px;
+  filter: $dropShadow;
+  border-radius: 8px;
+}
+
+.booked__wrapper__prestationPicture__wrapper__image {
+  width: 100%;
+  border-radius: 8px;
+}
+
+// ********** button **********
+.headerWrapper__navWrapper__branding__buttonWrapper {
+  margin-top: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.headerWrapper__navWrapper__branding__buttonWrapper__button {
+  @include submitButton;
+}
