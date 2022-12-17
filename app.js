@@ -2,7 +2,6 @@
 require('dotenv').config()
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const morgan = require('morgan')
 const cors = require('cors')
 let whitelist = ['http://localhost:4200', 'https://nailissa.fr']
 const corsOptions = {
@@ -30,7 +29,7 @@ const provisionRoutes = require('./routes/provisions')
 const calendarRoutes = require('./routes/calendar')
 
 //  config
-const port = parseInt(process.env.PORT, 10) || 8800
+const port = parseInt(process.env.PORT, 10) || 8000
 const baseUrl = process.env.BASE_URL + port + '/api'
 
 // ********** Init Server **********
@@ -42,16 +41,15 @@ require('./db/mongoose')(app)
 
 // middleware
 app
-  .use(morgan('dev'))
   .use(cors(corsOptions))
   .use(express.json())
   .use(cookieParser())
+  // Routes
+  .use(provisionRoutes)
   // Verify Token
   .get('*', isValidUser)
   .get('/api/jwtid', isAccessGranted)
-  // Routes
   .use(userRoutes)
-  .use(provisionRoutes)
   .use(calendarRoutes)
 
 // starting app

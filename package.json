@@ -4,7 +4,8 @@
   "description": "Rest API for nailissa website",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "NODE_ENV=production node app.js",
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "author": "Nicolas DECRESSAC",
   "license": "ISC",
@@ -16,8 +17,9 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.4",
-    "mongoose-unique-validator": "^3.1.0",
-    "morgan": "^1.10.0",
+    "mongoose-unique-validator": "^3.1.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.20"
   },
   "engines": {

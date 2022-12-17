@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { isValidUser } = require('../middleware/authentication/jsonwebtoken')
 
 //import calendar controllers
 const { createUser } = require('../controllers/user/createUser')
@@ -12,10 +13,10 @@ const { findUserProvisions } = require('../controllers/user/getUserProvision')
 const baseRoute = '/api/users'
 router.post(baseRoute + '/signup', createUser)
 router.post(baseRoute + '/login', connectUser)
-router.get(baseRoute + '/logout', disconnectUser)
-router.get(baseRoute + '/:id', findUserById)
-router.put(baseRoute + '/update/:id', editUserAddress)
-router.put(baseRoute + '/booking/:id', editUserBookedDate)
-router.get(baseRoute + '/:id/booked', findUserProvisions)
+router.get(baseRoute + '/logout', isValidUser, disconnectUser)
+router.get(baseRoute + '/:id', isValidUser, findUserById)
+router.put(baseRoute + '/update/:id', isValidUser, editUserAddress)
+router.put(baseRoute + '/booking/:id', isValidUser, editUserBookedDate)
+router.get(baseRoute + '/:id/booked', isValidUser, findUserProvisions)
 
 module.exports = router

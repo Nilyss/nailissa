@@ -29,9 +29,6 @@
 }
 
 .formWrapper__form__inputWrapper {
-  @media (max-width: $breakpointTablet) {
-    flex-flow: row;
-  }
   @media (max-width: $breakpointMobile) {
     align-items: center;
     flex-flow: column;

@@ -24,7 +24,12 @@ module.exports.connectUser = async (req, res) => {
         const token = createToken(user._id)
 
         // send token in cookies
-        res.cookie('jwt', token, { httpOnly: true, maxAge: cookieMaxAge })
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          maxAge: cookieMaxAge,
+          secure: true,
+          sameSite: 'strict',
+        })
 
         const connectedUser = {
           id: user.id,
