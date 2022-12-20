@@ -1,8 +1,13 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-import { User } from '../../../authentication/user'
-import { AuthenticationService } from '../../../authentication/authentication.service'
-import { Subscription } from 'rxjs'
+import { catchError, finalize, of, Subscription, tap } from 'rxjs'
 import { Router } from '@angular/router'
+import { UserService } from '../../../data/services/user.service'
+
+// NgRx
+import { Store } from '@ngrx/store'
+import * as UserActions from '../../../data/NgRx/controller/user/userAction'
+import { User } from '../../../data/NgRx/models/user'
+import { UserState } from '../../../data/NgRx/controller/user/userReducer'
 
 @Component({
   selector: 'app-home-header-user-modal',
@@ -15,10 +20,25 @@ export class HomeHeaderUserModalComponent implements OnDestroy, OnInit {
   firstItemTxt: string = 'Mes Rendez-vous'
   secondItemTxt: string = 'Profile'
   buttonTxt: string = 'Déconnexion'
+
   logout() {
-    this.isSubscribed = this.authService
+    this.isSubscribed = this.userService
       .disconnectUserRequest()
-      .subscribe(() => this.goToSignIn())
+      .pipe(
+        tap((response) =>
+          this.store.dispatch(
+            UserActions.logout({ response, isLoggedIn: false })
+          )
+        ),
+        catchError((error) => {
+          console.error(error)
+          return of(null)
+        }),
+        finalize(() => {
+          this.goToSignIn()
+        })
+      )
+      .subscribe()
   }
 
   goToSignIn() {
@@ -34,8 +54,9 @@ export class HomeHeaderUserModalComponent implements OnDestroy, OnInit {
   }
 
   constructor(
-    private authService: AuthenticationService,
-    private router: Router
+    private userService: UserService,
+    private router: Router,
+    private store: Store<{ user: UserState }>
   ) {}
   ngOnInit() {}
   ngOnDestroy() {

@@ -7,7 +7,10 @@ export const initApp = createAction('Init app')
 
 export const getUserData = createAction(
   '[user] GetUserData',
-  props<{ user: Omit<User, 'password'> }>()
+  props<{ user: Omit<User, 'password'>; isLoggedIn: boolean }>()
 )
 
-export const logout = createAction('[User] Logout')
+export const logout = createAction(
+  '[User] Logout',
+  props<{ response: string; isLoggedIn: boolean }>()
+)

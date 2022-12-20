@@ -6,10 +6,12 @@ import { User } from '../../models/user'
 import * as UserActions from './userAction'
 
 export interface UserState {
+  isLoggedIn: boolean
   user: Omit<User, 'password'>
 }
 
 export const initialState = {
+  isLoggedIn: false,
   user: <Omit<User, 'password'>>{
     _id: null,
     email: null,
@@ -25,13 +27,20 @@ export const userReducer = createReducer(
   on(UserActions.initApp, (state) => {
     return {
       ...state,
-      user: state.user,
     }
   }),
   on(UserActions.getUserData, (state, props) => {
     return {
       ...state,
+      isLoggedIn: props.isLoggedIn,
       user: props.user,
+    }
+  }),
+  on(UserActions.logout, (state, props) => {
+    return {
+      ...state,
+      isLoggedIn: props.isLoggedIn,
+      user: initialState.user,
     }
   })
 )

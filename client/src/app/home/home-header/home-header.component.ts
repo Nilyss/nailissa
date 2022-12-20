@@ -6,9 +6,14 @@ import {
   EventEmitter,
 } from '@angular/core'
 import { Router } from '@angular/router'
-import { AuthenticationService } from '../../authentication/authentication.service'
-import { map, Subscription, switchMap } from 'rxjs'
-import { User } from '../../authentication/user'
+import { Subscription, tap } from 'rxjs'
+import { UserService } from '../../data/services/user.service'
+
+// NgRx
+import { Store, select } from '@ngrx/store'
+import { selectUserData } from '../../data/NgRx/controller/user/userSelector'
+import { User } from '../../data/NgRx/models/user'
+import { UserState } from '../../data/NgRx/controller/user/userReducer'
 
 @Component({
   selector: 'app-home-header',
@@ -18,7 +23,7 @@ import { User } from '../../authentication/user'
 export class HomeHeaderComponent implements OnInit, OnDestroy {
   @Output() outputUserData = new EventEmitter<any>()
   isSubscribed: Subscription | undefined
-  userData: User
+  user: User
   hours: number
   isShowUserProfileModal: boolean = false
 
@@ -53,14 +58,10 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   // ********** on init component **********
 
   getUserData() {
-    this.isSubscribed = this.authService
-      .getConnectedUserId()
+    this.isSubscribed = this.store
       .pipe(
-        switchMap((userId) => this.authService.getConnectedUserData(userId)),
-        map((user) => {
-          this.userData = user
-          this.outputUserData.emit(user)
-        })
+        select(selectUserData),
+        tap((user: User) => (this.user = user))
       )
       .subscribe()
   }
@@ -74,12 +75,13 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   }
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private userService: UserService,
+    private store: Store<{ user: UserState }>
   ) {}
 
   ngOnInit() {
-    this.getUserData()
     this.getTime()
+    this.getUserData()
   }
   ngOnDestroy() {
     this.isSubscribed?.unsubscribe()

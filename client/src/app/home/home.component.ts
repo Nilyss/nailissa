@@ -1,11 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Store } from '@ngrx/store'
-import disableScroll from 'disable-scroll'
+import { catchError, of, Subscription, switchMap, tap } from 'rxjs'
+
+// External Libs
 import AOS from 'aos'
-import { UserService } from '../data/services/user.service'
-import { catchError, Observable, of, Subscription, switchMap, tap } from 'rxjs'
-import { getUserData } from '../data/NgRx/controller/user/userAction'
+import disableScroll from 'disable-scroll'
+
+// NGRX
+import { Store } from '@ngrx/store'
+import * as UserActions from '../data/NgRx/controller/user/userAction'
+// MODELS
 import { User } from '../data/NgRx/models/user'
+import { UserState } from '../data/NgRx/controller/user/userReducer'
+// SERVICES
+import { UserService } from '../data/services/user.service'
 
 @Component({
   selector: 'app-home',
@@ -40,9 +47,12 @@ import { User } from '../data/NgRx/models/user'
   styleUrls: ['home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  // ********** VARIABLES **********
+
   subscription: Subscription | undefined
-  user$: Observable<User>
-  user: User
+
+  // ********** ON INIT FUNCTIONS **********
+
   disableScrollWhileLoader() {
     disableScroll.on()
     setTimeout(enable, 3000)
@@ -63,20 +73,28 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.userService
       .getConnectedUserId()
       .pipe(
-        switchMap((userId: string) =>
+        switchMap((userId: User['_id']) =>
           this.userService.getConnectedUserData(userId)
         ),
         tap((user: Omit<User, 'password'>) => {
-          this.store.dispatch(getUserData({ user }))
-          this.user$ = this.store.select('user')
+          this.store.dispatch(
+            UserActions.getUserData({ user, isLoggedIn: true })
+          )
         }),
         catchError((error) => this.handleError(error, undefined))
       )
       .subscribe()
   }
 
+  // ********** HANDLE ERRORS **********
+
+  private handleError(error: Error, errorValue: any) {
+    console.error(error)
+    return of(errorValue)
+  }
+
   constructor(
-    private store: Store<{ user }>,
+    private store: Store<{ user: UserState }>,
     private userService: UserService
   ) {}
   ngOnInit() {
@@ -87,10 +105,5 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe()
-  }
-
-  private handleError(error: Error, errorValue: any) {
-    console.error('catch error =>', error)
-    return of(errorValue)
   }
 }

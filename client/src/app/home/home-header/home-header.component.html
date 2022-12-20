@@ -90,7 +90,7 @@
       </li>
     </ul>
     <ul
-      *ngIf="userData === undefined"
+      *ngIf="user === undefined"
       class="headerWrapper__contactWrapper__account"
     >
       <li class="headerWrapper__contactWrapper__account__buttons">
@@ -110,14 +110,14 @@
         </button>
       </li>
     </ul>
-    <ul *ngIf="userData" class="headerWrapper__contactWrapper__account">
+    <ul *ngIf="user" class="headerWrapper__contactWrapper__account">
       <li
         (mouseenter)="toggleProfileModal($event)"
         class="headerWrapper__contactWrapper__account__connected"
       >
         <p class="headerWrapper__contactWrapper__account__connected__userName">
           <span class="material-symbols-outlined"> waving_hand </span>
-          {{ hiMessage }} {{ userData.firstName }} !
+          {{ hiMessage }} {{ user.firstName }} !
         </p>
         <span
           class="headerWrapper__contactWrapper__account__connected__icon material-symbols-outlined"
@@ -188,7 +188,7 @@
       arrow_drop_up
     </span>
     <app-home-header-user-modal
-      [userData]="userData"
+      [userData]="user"
     ></app-home-header-user-modal>
   </div>
 </div>
