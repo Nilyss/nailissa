@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { Provision } from './provision'
-import { catchError, Observable, of, tap } from 'rxjs'
+import { Provision } from '../NgRx/models/provision'
+import { catchError, Observable, of } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 @Injectable({
@@ -13,10 +13,7 @@ export class ProvisionService {
         this.apiBaseUrl + this.provisionEndpoint,
         this.httpOptions
       )
-      .pipe(
-        tap((res) => this.log(res)),
-        catchError((error) => this.handleError(error, null))
-      )
+      .pipe(catchError((error) => this.handleError(error, null)))
   }
 
   private apiBaseUrl: string = 'http://localhost:8000/api'
@@ -29,11 +26,7 @@ export class ProvisionService {
     withCredentials: true,
   }
 
-  // logs & errors
-  private log(res: any) {
-    console.log(res)
-  }
-
+  // Errors
   private handleError(error: Error, errorValue: any) {
     console.error(error)
     return of(errorValue)

@@ -14,6 +14,10 @@
   @media (max-width: $breakpointLaptop) {
     padding: 0.5em 1em 0.5em 1em;
     text-align: center;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
   }
   display: flex;
   justify-content: space-between;
@@ -25,16 +29,15 @@
   @media (max-width: $breakpointTablet) {
     gap: 0.5em;
   }
-  @media (max-width: $breakpointMobile) {
-    flex-flow: column;
-  }
   display: flex;
   gap: 2em;
 }
 
 .headerWrapper__contactWrapper__list__elements {
   @media (max-width: $breakpointMobile) {
-    font-size: 14px;
+    font-size: 12px;
+    flex-flow: column;
+    justify-content: center;
   }
   display: flex;
   align-items: center;
@@ -55,6 +58,7 @@
 .headerWrapper__contactWrapper__list__elements__logoWrapper {
   @media (max-width: $breakpointMobile) {
     margin: auto;
+    display: flex;
   }
   width: 25px;
 }

@@ -7,10 +7,7 @@ const serverError = `Can't get provisions, please try again later`
 
 module.exports.getProvisions = async (req, res) => {
   try {
-    console.log('req body ?', req.body)
-    console.log('req params ?', req.params)
     await Provision.find().then((provisions) => {
-      console.log('provisions =>', provisions)
       if (!provisions) {
         console.log(messageError, provisions)
         return res.status(400).json(messageError)
