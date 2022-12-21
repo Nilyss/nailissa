@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store'
 // Models
 import { User } from '../../models/user'
 
-export const initApp = createAction('Init app')
+export const initApp = createAction('Init User')
 
 export const getUserData = createAction(
   '[user] GetUserData',

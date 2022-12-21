@@ -8,11 +8,15 @@ import disableScroll from 'disable-scroll'
 // NGRX
 import { Store } from '@ngrx/store'
 import * as UserActions from '../data/NgRx/controller/user/userAction'
+import * as ProvisionActions from '../data/NgRx/controller/provision/provisionAction'
 // MODELS
 import { User } from '../data/NgRx/models/user'
+import { Provision } from '../data/NgRx/models/provision'
 import { UserState } from '../data/NgRx/controller/user/userReducer'
+import { ProvisionState } from '../data/NgRx/controller/provision/provisionReducer'
 // SERVICES
 import { UserService } from '../data/services/user.service'
+import { ProvisionService } from '../data/services/provision.service'
 
 @Component({
   selector: 'app-home',
@@ -69,6 +73,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     AOS.refresh()
   }
 
+  getProvisionFromDb() {
+    this.subscription = this.provisionService
+      .getAllProvision()
+      .pipe(
+        tap((provisions: Provision[]) =>
+          this.store.dispatch(ProvisionActions.getProvisionData({ provisions }))
+        ),
+        catchError((error) => this.handleError(error, undefined))
+      )
+      .subscribe()
+  }
+
   getConnectedUserData() {
     this.subscription = this.userService
       .getConnectedUserId()
@@ -94,12 +110,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private store: Store<{ user: UserState }>,
-    private userService: UserService
+    private store: Store<{ user: UserState; provision: ProvisionState }>,
+    private userService: UserService,
+    private provisionService: ProvisionService
   ) {}
   ngOnInit() {
     this.initPackageAOS()
     this.disableScrollWhileLoader()
+    this.getProvisionFromDb()
     this.getConnectedUserData()
   }
 

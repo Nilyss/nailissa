@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { tap, catchError, Observable, of } from 'rxjs'
+import { catchError, Observable, of } from 'rxjs'
 
 // Models
 import { User } from '../NgRx/models/user'
@@ -18,10 +18,7 @@ export class UserService {
         user,
         this.httpOptions
       )
-      .pipe(
-        tap((res: User) => this.log(res)),
-        catchError((error) => this.handleError(error, null))
-      )
+      .pipe(catchError((error) => this.handleError(error, null)))
   }
 
   connectUserRequest(
@@ -37,10 +34,7 @@ export class UserService {
         },
         this.httpOptions
       )
-      .pipe(
-        tap((res: User) => this.log(res)),
-        catchError((error) => this.handleError(error, null))
-      )
+      .pipe(catchError((error) => this.handleError(error, null)))
   }
 
   disconnectUserRequest(): Observable<User['_id']> {
@@ -49,21 +43,13 @@ export class UserService {
         this.apiBaseUrl + this.userEndpoint + '/logout',
         this.httpOptions
       )
-      .pipe(
-        tap((res: User['_id']) => this.log(res)),
-        catchError((error) => this.handleError(error, null))
-      )
+      .pipe(catchError((error) => this.handleError(error, null)))
   }
 
   getConnectedUserId(): Observable<User['_id']> {
     return this.http
       .get<User['_id']>(this.apiBaseUrl + '/jwtid', this.httpOptions)
-      .pipe(
-        tap((res: User['_id']) => {
-          this.log('User ID successfully fetched => ' + res)
-        }),
-        catchError((error) => this.handleError(error, null))
-      )
+      .pipe(catchError((error) => this.handleError(error, null)))
   }
 
   getConnectedUserData(
@@ -74,12 +60,7 @@ export class UserService {
         this.apiBaseUrl + this.userEndpoint + `/${userId}`,
         this.httpOptions
       )
-      .pipe(
-        tap((res: Omit<User, 'password'>) =>
-          this.log("User's datas successfully fetched =>" + res)
-        ),
-        catchError((error) => this.handleError(error, undefined))
-      )
+      .pipe(catchError((error) => this.handleError(error, undefined)))
   }
 
   editConnectedUserData(user: User): Observable<User> {
@@ -89,10 +70,7 @@ export class UserService {
         user,
         this.httpOptions
       )
-      .pipe(
-        tap((res: User) => this.log(`User's datas get updated` + res)),
-        catchError((error) => this.handleError(error, undefined))
-      )
+      .pipe(catchError((error) => this.handleError(error, undefined)))
   }
 
   editConnectedUserBookedDate(
@@ -105,10 +83,7 @@ export class UserService {
         data,
         this.httpOptions
       )
-      .pipe(
-        tap((res: User) => this.log(`User's booked date get updated` + res)),
-        catchError((error) => this.handleError(error, undefined))
-      )
+      .pipe(catchError((error) => this.handleError(error, undefined)))
   }
 
   getUserBookedData(userId: User['_id']): Observable<BookedDate> {
@@ -117,12 +92,7 @@ export class UserService {
         this.apiBaseUrl + this.userEndpoint + `/${userId}` + `/booked`,
         this.httpOptions
       )
-      .pipe(
-        tap((res: BookedDate) =>
-          this.log(`Booked provision successfully fetched : ${res}`)
-        ),
-        catchError((error) => this.handleError(error, undefined))
-      )
+      .pipe(catchError((error) => this.handleError(error, undefined)))
   }
 
   // ********** HTTP REQUEST CONFIGURATION **********
@@ -137,10 +107,7 @@ export class UserService {
     withCredentials: true,
   }
 
-  // ********** LOGS AND ERRORS **********
-  private log(res: any) {
-    console.log(res)
-  }
+  // ********** ERRORS **********
   private handleError(error: Error, errorValue: any) {
     console.error(error)
     return of(errorValue)

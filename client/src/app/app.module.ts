@@ -13,7 +13,8 @@ import { AuthenticationModule } from './authentication/authentication.module'
 
 // ********** NGRX **********
 import { StoreModule } from '@ngrx/store'
-// ***** Reducer *****
+// ***** Reducer (contain state) *****
+import { ProvisionReducer } from './data/NgRx/controller/provision/provisionReducer'
 import { UserReducer } from './data/NgRx/controller/user/userReducer'
 import { logMetaReducer } from './data/NgRx/metaReducers/log'
 
@@ -27,6 +28,7 @@ import { logMetaReducer } from './data/NgRx/metaReducers/log'
     LottieModule.forRoot({ player: playerFactory }),
     StoreModule.forRoot(
       {
+        provisions: ProvisionReducer,
         user: UserReducer,
       },
       { metaReducers: [logMetaReducer] }

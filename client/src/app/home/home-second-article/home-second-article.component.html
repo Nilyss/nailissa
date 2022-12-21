@@ -1,9 +1,9 @@
 <article
-  *ngIf="provisionsData"
+  *ngIf="provisions"
   id="prestations" class="article">
   <div class="article__modalWrapper">
     <app-home-time-picking
-      [provisionsData]='provisionsData'
+      [provisionsData]='provisions'
       [provisionId]='provisionId'
       (modalState)="modalState = $event"
       *ngIf="isModalDisplay && modalState !== false"
@@ -27,7 +27,7 @@
     data-aos-offset="500"
   >
     <li
-      *ngFor="let prestation of provisionsData"
+      *ngFor="let prestation of provisions"
       class="article__cardsWrapper__cards"
     >
       <figure class="imageWrapper">
