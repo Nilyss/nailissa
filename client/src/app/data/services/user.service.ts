@@ -10,9 +10,11 @@ import { User } from '../NgRx/models/user'
 })
 export class UserService {
   // ********** CRUD OPERATIONS => USER
-  createUserRequest(user: User): Observable<User> {
+  createUserRequest(
+    user: Omit<User, 'bookedDate'>
+  ): Observable<Omit<User, 'bookedDate'>> {
     return this.http
-      .post<User>(
+      .post<Omit<User, 'bookedDate'>>(
         this.apiBaseUrl + this.userEndpoint + '/signup',
         user,
         this.httpOptions

@@ -15,7 +15,217 @@ import { editUserData } from '../../data/NgRx/controller/user/userAction'
 
 @Component({
   selector: 'app-authentication-profile',
-  templateUrl: './authentication-profile.component.html',
+  template: `<body>
+    <header>
+      <app-home-header></app-home-header>
+    </header>
+    <main>
+      <article *ngIf="user" class="footerWrapper">
+        <form #editForm="ngForm" class="footerWrapper__form">
+          <div class="footerWrapper__form__titleWrapper">
+            <h1 class="footerWrapper__form__titleWrapper__title">
+              {{ componentTitle }}
+            </h1>
+          </div>
+          <ul class="footerWrapper__form__list">
+            <li class="footerWrapper__form__list__elements">
+              <span class="elementLabel"
+                ><span class="elementIcon material-symbols-outlined">
+                  badge </span
+                >{{ firstListElement }}</span
+              >
+              <span class="elementContent capitalise"
+                >{{ user.firstName }} {{ user.lastName }}</span
+              >
+            </li>
+            <li class="footerWrapper__form__list__elements">
+              <span class="elementLabel"
+                ><span class="elementIcon material-symbols-outlined">
+                  alternate_email </span
+                >{{ secondListElement }}</span
+              >
+              <span class="elementContent">{{ user.email }}</span>
+            </li>
+            <li class="footerWrapper__form__list__elements">
+              <span class="elementLabel"
+                ><span class="elementIcon material-symbols-outlined">
+                  phone_iphone
+                </span>
+
+                {{ thirdListElement }}</span
+              >
+              <span class="elementContent">{{ user.phoneNumber }}</span>
+            </li>
+            <li class="footerWrapper__form__list__elements">
+              <span class="elementLabel">
+                <span class="elementIcon material-symbols-outlined">
+                  house
+                </span>
+                {{ fourthListElement }}</span
+              >
+              <ul
+                *ngIf="isEdition === true"
+                class="footerWrapper__form__list__elements__sublist"
+              >
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement3
+                  }}</span
+                  ><input
+                    name="number"
+                    [(ngModel)]="numberInput"
+                    #number="ngModel"
+                    required
+                    class="footerWrapper__form__list__elements__sublist__elements__inputs"
+                    type="text"
+                  />
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement1
+                  }}</span
+                  ><input
+                    name="address"
+                    [(ngModel)]="addressInput"
+                    #address="ngModel"
+                    required
+                    class="footerWrapper__form__list__elements__sublist__elements__inputs"
+                    type="text"
+                  />
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement2
+                  }}</span
+                  ><input
+                    name="extendAddress"
+                    [(ngModel)]="extendAddressInput"
+                    #extendAddress="ngModel"
+                    required
+                    class="footerWrapper__form__list__elements__sublist__elements__inputs"
+                    type="text"
+                  />
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement4
+                  }}</span
+                  ><input
+                    name="postalCode"
+                    [(ngModel)]="postalCodeInput"
+                    #postalCode="ngModel"
+                    required
+                    class="footerWrapper__form__list__elements__sublist__elements__inputs"
+                    type="text"
+                  />
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement5
+                  }}</span
+                  ><input
+                    name="city"
+                    [(ngModel)]="cityInput"
+                    #city="ngModel"
+                    required
+                    class="footerWrapper__form__list__elements__sublist__elements__inputs"
+                    type="text"
+                  />
+                </li>
+              </ul>
+              <ul
+                *ngIf="isEdition === false"
+                class="footerWrapper__form__list__elements__sublist"
+              >
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement3
+                  }}</span
+                  ><span class="elementContent--sublist">{{
+                    user.postalAddress.number
+                  }}</span>
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement1
+                  }}</span>
+                  <span class="elementContent--sublist">{{
+                    user.postalAddress.address
+                  }}</span>
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement2
+                  }}</span
+                  ><span class="elementContent--sublist">{{
+                    user.postalAddress.extendAddress
+                  }}</span>
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement4
+                  }}</span
+                  ><span class="elementContent--sublist">{{
+                    user.postalAddress.postalCode
+                  }}</span>
+                </li>
+                <li
+                  class="footerWrapper__form__list__elements__sublist__elements elementContent"
+                >
+                  <span class="elementLabel--sublist">{{
+                    subListElement5
+                  }}</span
+                  ><span class="elementContent--sublist">{{
+                    user.postalAddress.city
+                  }}</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="footerWrapper__form__buttonWrapper">
+            <button
+              [disabled]="!editForm.valid"
+              (click)="handleSubmit()"
+              class="footerWrapper__form__buttonWrapper__buttons validate"
+            >
+              {{ firstButton }}
+            </button>
+            <button
+              (click)="editData()"
+              class="footerWrapper__form__buttonWrapper__buttons edit"
+            >
+              {{ secondButton }}
+            </button>
+            <button
+              (click)="cancelEdition()"
+              class="footerWrapper__form__buttonWrapper__buttons cancel"
+            >
+              {{ thirdButton }}
+            </button>
+          </div>
+        </form>
+      </article>
+    </main>
+    <footer><app-home-footer></app-home-footer></footer>
+  </body> `,
   styleUrls: ['./authentication-profile.component.scss'],
 })
 export class AuthenticationProfileComponent implements OnInit, OnDestroy {

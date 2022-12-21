@@ -6,6 +6,6 @@ import { Provision } from '../../models/provision'
 export const initApp = createAction('Init Provision')
 
 export const getProvisionData = createAction(
-  '[user] GetProvisionData',
+  '[provision] GetProvisionData',
   props<{ provisions: Provision[] }>()
 )
