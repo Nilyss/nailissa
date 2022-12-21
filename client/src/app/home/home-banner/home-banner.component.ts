@@ -2,7 +2,25 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-home-banner',
-  templateUrl: './home-banner.component.html',
+  template: `<article class="bannerArticle">
+    <figure class="bannerArticle__pictureWrapper">
+      <div class="bannerArticle__pictureWrapper__circle"></div>
+      <img
+        [src]="bannerPicture"
+        alt="banner"
+        class="bannerArticle__pictureWrapper__picture"
+      />
+    </figure>
+    <div class="bannerArticle__contentWrapper">
+      <h1 class="bannerArticle__contentWrapper__title">
+        {{ title }}
+      </h1>
+      <p class="bannerArticle__contentWrapper__subtitle">{{ subtitle }}</p>
+      <button class="bannerArticle__contentWrapper__button">
+        Saiba Mais »
+      </button>
+    </div>
+  </article> `,
   styleUrls: ['./home-banner.component.scss'],
 })
 export class HomeBannerComponent {

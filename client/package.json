@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "config": "ts-node ./scripts/setenv.ts",
-    "start": "npm run config -- --environment=dev && ng serve",
+    "start": "ng serve -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development"
   },
@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "@emailjs/browser": "^3.10.0",
+    "@ngrx/store": "^15.0.0",
     "aos": "^2.3.4",
     "disable-scroll": "^0.6.0",
     "dotenv": "^16.0.3",

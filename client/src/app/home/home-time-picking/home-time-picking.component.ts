@@ -6,26 +6,103 @@ import {
   OnDestroy,
   Input,
 } from '@angular/core'
-import { CalendarService } from '../calendar.service'
-import { Subscription, switchMap } from 'rxjs'
-import { Provision } from '../provision'
-import { BookedDate } from '../../authentication/bookedDate'
-import { AuthenticationService } from '../../authentication/authentication.service'
+import { Subscription, switchMap, tap } from 'rxjs'
+
+// NgRx
+import * as ActionUsers from '../../data/NgRx/controller/user/userAction'
+
+// Models
+import { User } from '../../data/NgRx/models/user'
+import { Provision } from '../../data/NgRx/models/provision'
+
+// Services
+import { UserService } from '../../data/services/user.service'
+import { Store } from '@ngrx/store'
+import { UserState } from '../../data/NgRx/controller/user/userReducer'
 
 @Component({
   selector: 'app-home-time-picking',
-  templateUrl: './home-time-picking.component.html',
+  template: `
+    <div
+      class="timePickingModal"
+      data-aos="fade-down-left"
+      data-aos-duration="500"
+      data-aos-easing="ease-out"
+    >
+      <div class="timePickingModal__Wrapper">
+        <div class="timePickingModal__Wrapper__titleWrapper">
+          <h3 class="timePickingModal__Wrapper__titleWrapper__title">
+            {{ modalTitle }}
+          </h3>
+          <p class="timePickingModal__Wrapper__titleWrapper__prestationName">
+            {{ provision.name }}
+          </p>
+          <p
+            class="timePickingModal__Wrapper__titleWrapper__prestationDuration"
+          >
+            {{ provision.time }} — {{ provision.price }}
+          </p>
+        </div>
+        <form
+          #sendDatePickingForm="ngForm"
+          (ngSubmit)="saveDatePicked($event)"
+          class="timePickingModal__Wrapper__bodyWrapper"
+        >
+          <div class="timePickingModal__Wrapper__bodyWrapper__dateInputWrapper">
+            <input
+              id="datePick"
+              name='"datePick'
+              [(ngModel)]="datePickInput"
+              #datePick="ngModel"
+              required
+              class="timePickingModal__Wrapper__bodyWrapper__dateInputWrapper__input"
+              type="date"
+            />
+          </div>
+          <div class="timePickingModal__Wrapper__bodyWrapper__timeWrapper">
+            <ul
+              class="timePickingModal__Wrapper__bodyWrapper__timeWrapper__list"
+            >
+              <li
+                *ngFor="let time of getHours; let i = index"
+                [id]="i"
+                class="timePickingModal__Wrapper__bodyWrapper__timeWrapper__list__time"
+                [class.active]="selectedIndex === i"
+                (click)="setTimeIndex(i)"
+              >
+                {{ time }}
+              </li>
+            </ul>
+          </div>
+          <div class="timePickingModal__Wrapper__bodyWrapper__submitWrapper">
+            <button
+              class="timePickingModal__Wrapper__bodyWrapper__submitWrapper__button"
+            >
+              {{ modalSubmitButton }}
+            </button>
+            <button
+              (click)="closeModal()"
+              class="timePickingModal__Wrapper__bodyWrapper__submitWrapper__button--cancel"
+            >
+              {{ modalCancelButton }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `,
   styleUrls: ['./home-time-picking.component.scss'],
 })
 export class HomeTimePickingComponent implements OnInit, OnDestroy {
   @Input() provisionsData: Provision[]
   @Input() provisionId: string
   @Output() public modalState = new EventEmitter()
-  provision: BookedDate['provision']
+  provision: User['bookedDate']['provision']
   isSubscribed: Subscription | undefined
   modalTitle: string = 'Choisissez une date et un créneaux horaire'
   modalSubmitButton: string = 'Valider le rendez-vous'
   modalCancelButton: string = 'Annuler'
+  userId: string
 
   // target a date & time
   datePickInput: Date
@@ -57,29 +134,46 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
   }
 
   saveDatePicked(event: Event) {
-    const data: BookedDate = {
+    const bookedDate: User['bookedDate'] = {
       _id: '',
       day: this.datePickInput,
       hour: this.selectedTime,
       provision: this.provision,
     }
 
-    this.isSubscribed = this.authService
+    this.isSubscribed = this.userService
       .getConnectedUserId()
       .pipe(
+        // Save userId for futur get Request in script
+        tap((userId: string) => (this.userId = userId)),
+        // Save the bookedDate in DB
         switchMap((userId: string) =>
-          this.authService.editConnectedUserBookedDate(userId, data)
+          this.userService.editConnectedUserBookedDate(userId, bookedDate)
+        ),
+        // Get request for getting the provision ID generate by mongoDB, and refresh user State with good info
+        switchMap(() =>
+          this.userService
+            .getConnectedUserData(this.userId)
+            .pipe(
+              tap((user) =>
+                this.store.dispatch(
+                  ActionUsers.getUserData({ user, isLoggedIn: true })
+                )
+              )
+            )
         )
       )
       .subscribe(() => {
         this.closeModal()
-        alert(`Rendez-vous pris pour le ${data.day} à ${data.hour} !`)
+        alert(
+          `Rendez-vous pris pour le ${bookedDate.day} à ${bookedDate.hour} !`
+        )
       })
   }
 
   constructor(
-    private calendarService: CalendarService,
-    private authService: AuthenticationService
+    private userService: UserService,
+    private store: Store<{ user: UserState }>
   ) {}
 
   ngOnInit() {

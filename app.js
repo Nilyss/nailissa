@@ -46,10 +46,10 @@ app
   .use(cookieParser())
   // Routes
   .use(provisionRoutes)
+  .use(userRoutes) // moved for NGRX implementation test
   // Verify Token
   .get('*', isValidUser)
   .get('/api/jwtid', isAccessGranted)
-  .use(userRoutes)
   .use(calendarRoutes)
 
 // starting app

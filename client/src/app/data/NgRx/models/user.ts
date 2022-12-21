@@ -12,6 +12,19 @@ export class User {
     postalCode: string
     city: string
   }
+  bookedDate: {
+    _id: string
+    day: Date
+    hour: string
+    provision: {
+      _id: string
+      name: string
+      price: string
+      overview: string
+      image: string
+      time: string
+    }
+  }
   constructor(
     _id: string,
     email: string,
@@ -25,6 +38,19 @@ export class User {
       number: string
       postalCode: string
       city: string
+    },
+    bookedDate: {
+      _id: string
+      day: Date
+      hour: string
+      provision: {
+        _id: string
+        name: string
+        price: string
+        overview: string
+        image: string
+        time: string
+      }
     }
   ) {
     this._id = _id
@@ -34,5 +60,6 @@ export class User {
     this.lastName = lastName
     this.phoneNumber = phoneNumber
     this.postalAddress = postalAddress
+    this.bookedDate = bookedDate
   }
 }
