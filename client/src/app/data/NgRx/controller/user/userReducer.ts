@@ -19,6 +19,7 @@ export const initialState = {
     lastName: null,
     phoneNumber: null,
     postalAddress: null,
+    bookedDate: null,
   },
 }
 
@@ -36,6 +37,13 @@ export const userReducer = createReducer(
       user: props.user,
     }
   }),
+  on(UserActions.editUserData, (state, props) => {
+    return {
+      ...state,
+      user: props.user,
+    }
+  }),
+
   on(UserActions.logout, (state, props) => {
     return {
       ...state,

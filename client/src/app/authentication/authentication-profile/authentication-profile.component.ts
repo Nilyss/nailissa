@@ -1,8 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { User } from '../user'
 import { Router } from '@angular/router'
-import { AuthenticationService } from '../authentication.service'
-import { Subscription } from 'rxjs'
+import { UserService } from '../../data/services/user.service'
+import { Subscription, tap } from 'rxjs'
+
+// Models
+import { User } from '../../data/NgRx/models/user'
+import { Provision } from '../../data/NgRx/models/provision'
+
+// NgRx
+import { select, Store } from '@ngrx/store'
+import { UserState } from '../../data/NgRx/controller/user/userReducer'
+import { selectUserData } from '../../data/NgRx/controller/user/userSelector'
+import { editUserData } from '../../data/NgRx/controller/user/userAction'
 
 @Component({
   selector: 'app-authentication-profile',
@@ -11,15 +20,6 @@ import { Subscription } from 'rxjs'
 })
 export class AuthenticationProfileComponent implements OnInit, OnDestroy {
   isSubscribed: Subscription | undefined
-  userData: User
-  getUserData(user: User) {
-    this.userData = user
-    this.addressInput = this.userData.postalAddress.address
-    this.extendAddressInput = this.userData.postalAddress.extendAddress
-    this.numberInput = this.userData.postalAddress.number
-    this.postalCodeInput = this.userData.postalAddress.postalCode
-    this.cityInput = this.userData.postalAddress.city
-  }
   addressInput: string
   extendAddressInput: string
   numberInput: string
@@ -39,7 +39,24 @@ export class AuthenticationProfileComponent implements OnInit, OnDestroy {
   secondButton: string = 'Modifier'
   thirdButton: string = 'Annuler'
 
+  user: Omit<User, 'password'>
+  provisions: Provision[]
+
   isEdition: boolean = false
+  getUserData() {
+    this.isSubscribed = this.store
+      .pipe(
+        select(selectUserData),
+        tap((user) => (this.user = user))
+      )
+      .subscribe()
+    this.addressInput = this.user.postalAddress.address
+    this.extendAddressInput = this.user.postalAddress.extendAddress
+    this.numberInput = this.user.postalAddress.number
+    this.postalCodeInput = this.user.postalAddress.postalCode
+    this.cityInput = this.user.postalAddress.city
+  }
+
   editData() {
     this.isEdition = !this.isEdition
   }
@@ -51,8 +68,8 @@ export class AuthenticationProfileComponent implements OnInit, OnDestroy {
   }
   handleSubmit() {
     if (this.isEdition) {
-      const user: User = {
-        ...this.userData,
+      const user: Omit<User, 'password'> = {
+        ...this.user,
         postalAddress: {
           address: this.addressInput,
           extendAddress: this.extendAddressInput,
@@ -61,27 +78,24 @@ export class AuthenticationProfileComponent implements OnInit, OnDestroy {
           city: this.cityInput,
         },
       }
-      this.isSubscribed = this.authService
+
+      this.isSubscribed = this.userService
         .editConnectedUserData(user)
-        .subscribe()
-      this.isEdition = false
-      this.isSubscribed = this.authService
-        .getConnectedUserData(this.userData._id)
-        .subscribe()
-      return this.router
-        .navigateByUrl('/', { skipLocationChange: true })
-        .then(() => {
-          this.router.navigate(['account/profile'])
-        })
+        .subscribe(() => this.store.dispatch(editUserData({ user })))
+
+      return (this.isEdition = false)
     } else {
       return this.router.navigate([''])
     }
   }
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private userService: UserService,
+    private store: Store<{ user: UserState }>
   ) {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUserData()
+  }
   ngOnDestroy() {
     this.isSubscribed?.unsubscribe()
   }

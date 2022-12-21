@@ -6,8 +6,13 @@ import { User } from '../../models/user'
 export const initApp = createAction('Init User')
 
 export const getUserData = createAction(
-  '[user] GetUserData',
+  '[user] Get user data',
   props<{ user: Omit<User, 'password'>; isLoggedIn: boolean }>()
+)
+
+export const editUserData = createAction(
+  '[user] Edit user Data',
+  props<{ user: Omit<User, 'password'> }>()
 )
 
 export const logout = createAction(

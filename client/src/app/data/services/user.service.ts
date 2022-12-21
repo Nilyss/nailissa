@@ -4,7 +4,6 @@ import { catchError, Observable, of } from 'rxjs'
 
 // Models
 import { User } from '../NgRx/models/user'
-import { BookedDate } from '../NgRx/models/bookedDate'
 
 @Injectable({
   providedIn: 'root',
@@ -63,7 +62,7 @@ export class UserService {
       .pipe(catchError((error) => this.handleError(error, undefined)))
   }
 
-  editConnectedUserData(user: User): Observable<User> {
+  editConnectedUserData(user: Omit<User, 'password'>): Observable<User> {
     return this.http
       .put<User>(
         this.apiBaseUrl + this.userEndpoint + `/update` + `/${user._id}`,
@@ -75,21 +74,12 @@ export class UserService {
 
   editConnectedUserBookedDate(
     userId: string,
-    data: BookedDate
+    data: User['bookedDate']
   ): Observable<User> {
     return this.http
       .put<User>(
         this.apiBaseUrl + this.userEndpoint + `/booking` + `/${userId}`,
         data,
-        this.httpOptions
-      )
-      .pipe(catchError((error) => this.handleError(error, undefined)))
-  }
-
-  getUserBookedData(userId: User['_id']): Observable<BookedDate> {
-    return this.http
-      .get<BookedDate>(
-        this.apiBaseUrl + this.userEndpoint + `/${userId}` + `/booked`,
         this.httpOptions
       )
       .pipe(catchError((error) => this.handleError(error, undefined)))

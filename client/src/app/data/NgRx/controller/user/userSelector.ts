@@ -15,3 +15,8 @@ export const selectUserData = createSelector(
   selectUser,
   (state: UserState) => state.user
 )
+
+export const selectUserBookedDate = createSelector(
+  selectUser,
+  (state: UserState) => state.user.bookedDate
+)

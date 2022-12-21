@@ -1,7 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { BookedDate } from '../bookedDate'
-import { Subscription, switchMap } from 'rxjs'
-import { AuthenticationService } from '../authentication.service'
+import { Subscription } from 'rxjs'
+
+// Models
+import { User } from '../../data/NgRx/models/user'
+
+// NgRx
+import { Store } from '@ngrx/store'
+import { UserState } from '../../data/NgRx/controller/user/userReducer'
+import { selectUserBookedDate } from '../../data/NgRx/controller/user/userSelector'
 
 @Component({
   selector: 'app-authentication-booked-date',
@@ -10,28 +16,20 @@ import { AuthenticationService } from '../authentication.service'
 })
 export class AuthenticationBookedDateComponent implements OnInit, OnDestroy {
   isSubscribed: Subscription | undefined
-  bookedDate: BookedDate | undefined
-
+  bookedDate: User['bookedDate']
   componentTitleTrue: string = 'Mon rendez-vous :'
   componentTitleFalse: string = 'Aucun rendez-vous.'
   bookButton: string = 'Planifier un rendez-vous'
 
-  getBookedProvision() {
-    this.isSubscribed = this.authService
-      .getConnectedUserId()
-      .pipe(
-        switchMap((userId: string) =>
-          this.authService.getUserBookedData(userId)
-        )
-      )
-      .subscribe((bookedDate) => {
-        this.bookedDate = bookedDate
-      })
+  getBookedDate() {
+    this.isSubscribed = this.store
+      .select(selectUserBookedDate)
+      .subscribe((bookedDate) => (this.bookedDate = bookedDate))
   }
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private store: Store<{ user: UserState }>) {}
   ngOnInit() {
-    this.getBookedProvision()
+    this.getBookedDate()
   }
   ngOnDestroy() {
     this.isSubscribed?.unsubscribe()

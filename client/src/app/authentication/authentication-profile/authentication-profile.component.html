@@ -1,9 +1,9 @@
 <body>
   <header>
-    <app-home-header (outputUserData)="getUserData($event)"></app-home-header>
+    <app-home-header></app-home-header>
   </header>
   <main>
-    <article *ngIf="userData" class="footerWrapper">
+    <article *ngIf="user" class="footerWrapper">
       <form #editForm="ngForm" class="footerWrapper__form">
         <div class="footerWrapper__form__titleWrapper">
           <h1 class="footerWrapper__form__titleWrapper__title">
@@ -17,7 +17,7 @@
               >{{ firstListElement }}</span
             >
             <span class="elementContent capitalise"
-              >{{ userData.firstName }} {{ userData.lastName }}</span
+              >{{ user.firstName }} {{ user.lastName }}</span
             >
           </li>
           <li class="footerWrapper__form__list__elements">
@@ -26,7 +26,7 @@
                 alternate_email </span
               >{{ secondListElement }}</span
             >
-            <span class="elementContent">{{ userData.email }}</span>
+            <span class="elementContent">{{ user.email }}</span>
           </li>
           <li class="footerWrapper__form__list__elements">
             <span class="elementLabel"
@@ -36,7 +36,7 @@
 
               {{ thirdListElement }}</span
             >
-            <span class="elementContent">{{ userData.phoneNumber }}</span>
+            <span class="elementContent">{{ user.phoneNumber }}</span>
           </li>
           <li class="footerWrapper__form__list__elements">
             <span class="elementLabel">
@@ -52,13 +52,13 @@
               >
                 <span class="elementLabel--sublist">{{ subListElement3 }}</span
                 ><input
-                name="number"
-                [(ngModel)]="numberInput"
-                #number="ngModel"
-                required
-                class="footerWrapper__form__list__elements__sublist__elements__inputs"
-                type="text"
-              />
+                  name="number"
+                  [(ngModel)]="numberInput"
+                  #number="ngModel"
+                  required
+                  class="footerWrapper__form__list__elements__sublist__elements__inputs"
+                  type="text"
+                />
               </li>
               <li
                 class="footerWrapper__form__list__elements__sublist__elements elementContent"
@@ -122,7 +122,7 @@
               >
                 <span class="elementLabel--sublist">{{ subListElement3 }}</span
                 ><span class="elementContent--sublist">{{
-                userData.postalAddress.number
+                  user.postalAddress.number
                 }}</span>
               </li>
               <li
@@ -130,7 +130,7 @@
               >
                 <span class="elementLabel--sublist">{{ subListElement1 }}</span>
                 <span class="elementContent--sublist">{{
-                  userData.postalAddress.address
+                  user.postalAddress.address
                 }}</span>
               </li>
               <li
@@ -138,7 +138,7 @@
               >
                 <span class="elementLabel--sublist">{{ subListElement2 }}</span
                 ><span class="elementContent--sublist">{{
-                  userData.postalAddress.extendAddress
+                  user.postalAddress.extendAddress
                 }}</span>
               </li>
               <li
@@ -146,7 +146,7 @@
               >
                 <span class="elementLabel--sublist">{{ subListElement4 }}</span
                 ><span class="elementContent--sublist">{{
-                  userData.postalAddress.postalCode
+                  user.postalAddress.postalCode
                 }}</span>
               </li>
               <li
@@ -154,7 +154,7 @@
               >
                 <span class="elementLabel--sublist">{{ subListElement5 }}</span
                 ><span class="elementContent--sublist">{{
-                  userData.postalAddress.city
+                  user.postalAddress.city
                 }}</span>
               </li>
             </ul>
