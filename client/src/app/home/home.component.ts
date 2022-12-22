@@ -22,7 +22,7 @@ import { ProvisionService } from '../data/services/provision.service'
   selector: 'app-home',
   template: `
     <body class="body">
-      <!--      <app-home-loader></app-home-loader>-->
+      <app-home-loader></app-home-loader>
       <header>
         <app-home-header></app-home-header>
       </header>
@@ -94,7 +94,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         ),
         tap((user: Omit<User, 'password'>) => {
           this.store.dispatch(
-            UserActions.getUserData({ user, isLoggedIn: true })
+            UserActions.getUserData({
+              user,
+              isHomePageVisited: true,
+            })
           )
         }),
         catchError((error) => this.handleError(error, undefined))

@@ -6,12 +6,12 @@ import { User } from '../../models/user'
 import * as UserActions from './userAction'
 
 export interface UserState {
-  isLoggedIn: boolean
+  isHomePageVisited: boolean
   user: Omit<User, 'password'>
 }
 
 export const initialState = {
-  isLoggedIn: false,
+  isHomePageVisited: false,
   user: <Omit<User, 'password'>>{
     _id: null,
     email: null,
@@ -33,7 +33,7 @@ export const userReducer = createReducer(
   on(UserActions.getUserData, (state, props) => {
     return {
       ...state,
-      isLoggedIn: props.isLoggedIn,
+      isHomePageVisited: props.isHomePageVisited,
       user: props.user,
     }
   }),
@@ -47,7 +47,7 @@ export const userReducer = createReducer(
   on(UserActions.logout, (state, props) => {
     return {
       ...state,
-      isLoggedIn: props.isLoggedIn,
+      isHomePageVisited: props.isHomePageVisited,
       user: initialState.user,
     }
   })

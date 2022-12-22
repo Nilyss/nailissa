@@ -24,6 +24,9 @@
 }
 
 .loader__lottie {
+  @media (max-width: $breakpointMobile) {
+    width: 300px;
+  }
   animation: loaderDuration 2.7s linear forwards;
   width: 600px;
   margin: auto;

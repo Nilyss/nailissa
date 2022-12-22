@@ -8,7 +8,7 @@ export const selectUser = (state: AppState) => state.user
 
 export const isLoggedIn = createSelector(
   selectUser,
-  (state: UserState) => state.isLoggedIn
+  (state: UserState) => state.isHomePageVisited
 )
 
 export const selectUserData = createSelector(

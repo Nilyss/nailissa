@@ -24,6 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   &:after {
     content: '';
     width: 75%;
@@ -39,6 +40,9 @@
 // ********** lists **********
 
 .booked__wrapper__bodyWrapper {
+  @media (max-width: $breakpointLaptop) {
+    flex-flow: column;
+  }
   width: 85%;
   display: flex;
   align-items: center;
@@ -56,11 +60,16 @@
 }
 
 .list__elements {
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+    font-size: 14px;
+  }
   color: $secondaryFontColor;
   font-size: 18px;
   font-weight: 700;
   display: flex;
   justify-content: space-between;
+  text-align: center;
 }
 
 .list__elements--title {

@@ -152,15 +152,16 @@ export class HomeTimePickingComponent implements OnInit, OnDestroy {
         ),
         // Get request for getting the provision ID generate by mongoDB, and refresh user State with good info
         switchMap(() =>
-          this.userService
-            .getConnectedUserData(this.userId)
-            .pipe(
-              tap((user) =>
-                this.store.dispatch(
-                  ActionUsers.getUserData({ user, isLoggedIn: true })
-                )
+          this.userService.getConnectedUserData(this.userId).pipe(
+            tap((user) =>
+              this.store.dispatch(
+                ActionUsers.getUserData({
+                  user,
+                  isHomePageVisited: true,
+                })
               )
             )
+          )
         )
       )
       .subscribe(() => {

@@ -110,7 +110,7 @@ import { UserState } from '../../data/NgRx/controller/user/userReducer'
           </li>
         </ul>
         <ul
-          *ngIf="user === undefined"
+          *ngIf="!user || user._id === null"
           class="headerWrapper__contactWrapper__account"
         >
           <li class="headerWrapper__contactWrapper__account__buttons">
@@ -130,7 +130,10 @@ import { UserState } from '../../data/NgRx/controller/user/userReducer'
             </button>
           </li>
         </ul>
-        <ul *ngIf="user" class="headerWrapper__contactWrapper__account">
+        <ul
+          *ngIf="user && user._id !== null"
+          class="headerWrapper__contactWrapper__account"
+        >
           <li
             (mouseenter)="toggleProfileModal($event)"
             class="headerWrapper__contactWrapper__account__connected"
@@ -279,8 +282,8 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getTime()
     this.getUserData()
+    this.getTime()
   }
   ngOnDestroy() {
     this.isSubscribed?.unsubscribe()

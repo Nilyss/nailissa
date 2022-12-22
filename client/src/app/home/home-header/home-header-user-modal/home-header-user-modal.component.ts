@@ -75,7 +75,10 @@ export class HomeHeaderUserModalComponent implements OnDestroy, OnInit {
       .pipe(
         tap((response) =>
           this.store.dispatch(
-            UserActions.logout({ response, isLoggedIn: false })
+            UserActions.logout({
+              response,
+              isHomePageVisited: false,
+            })
           )
         ),
         catchError((error) => {

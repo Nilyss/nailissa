@@ -14,6 +14,10 @@ body {
 }
 
 .footerWrapper__form {
+  @media (max-width: $breakpointMobile) {
+    width: 310px;
+    text-align: center;
+  }
   width: 800px;
   display: flex;
   flex-flow: column;
@@ -34,7 +38,7 @@ body {
     font-size: 25px;
   }
   @media (max-width: $breakpointMobile) {
-    font-size: 25px;
+    font-size: 20px;
   }
   display: flex;
   flex-flow: column;
@@ -57,6 +61,9 @@ body {
 }
 
 .footerWrapper__form__list {
+  @media (max-width: $breakpointMobile) {
+width: 100%;
+  }
   display: flex;
   flex-flow: column;
   gap: 1em;
@@ -64,6 +71,9 @@ body {
 }
 
 .footerWrapper__form__list__elements {
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+  }
   list-style: none;
   display: flex;
   flex-flow: wrap;
@@ -73,6 +83,9 @@ body {
 }
 
 .footerWrapper__form__list__elements__sublist {
+  @media (max-width: $breakpointMobile) {
+    align-items: center;
+  }
   margin-top: 1em;
   display: flex;
   flex-flow: column;
@@ -83,6 +96,11 @@ body {
 }
 
 .footerWrapper__form__list__elements__sublist__elements {
+  @media (max-width: $breakpointMobile) {
+    flex-flow: column;
+    width: fit-content;
+    text-align: center;
+  }
   list-style: none;
   width: 100%;
   display: flex;
@@ -90,28 +108,43 @@ body {
 }
 
 .elementLabel {
+  @media (max-width: $breakpointMobile) {
+    font-size: 14px;
+  }
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
   color: $ternaryFontColor;
   display: flex;
   gap: 0.3em;
 }
 
 .elementIcon {
+  @media (max-width: $breakpointMobile) {
+    font-size: 20px;
+  }
   font-size: 25px;
 }
 
 .elementLabel--sublist {
+  @media (max-width: $breakpointMobile) {
+    font-size: 14px;
+  }
   font-weight: 700;
   font-size: 16px;
   color: $ternaryFontColor;
 }
 
 .elementContent {
+  @media (max-width: $breakpointMobile) {
+    font-size: 16px;
+  }
   font-size: 18px;
 }
 
 .elementContent--sublist {
+  @media (max-width: $breakpointMobile) {
+    font-size: 13px;
+  }
   font-size: 15px;
 }
 
@@ -121,6 +154,9 @@ body {
 
 // ********** inputs **********
 .footerWrapper__form__list__elements__sublist__elements__inputs {
+  @media (max-width: $breakpointMobile) {
+    width: 200px;
+  }
   width: 50%;
   padding: 0.3em;
   &:focus {
@@ -148,7 +184,7 @@ body {
     cursor: unset;
     transform: unset;
     box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
-    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
 }
 

@@ -254,17 +254,27 @@
 }
 
 .headerWrapper__userModalWrapper--active {
+  @media(max-width: $breakpointLaptop) {
+    top: 45%;
+  }
+  @media(max-width: $breakpointMobile) {
+    top: 15%;
+    right: 7%;
+  }
   transition: All 400ms ease-out;
   transform: translateX(0);
   position: absolute;
   top: 18%;
-  right: 4.75%;
+  right: 4%;
   display: flex;
   flex-flow: column;
   align-items: flex-end;
 }
 
 .headerWrapper__userModalWrapper__icon {
+  @media(max-width: $breakpointMobile) {
+    display: none;
+  }
   font-size: 40px;
   margin-bottom: -0.4em;
 }

@@ -7,7 +7,10 @@ export const initApp = createAction('Init User')
 
 export const getUserData = createAction(
   '[user] Get user data',
-  props<{ user: Omit<User, 'password'>; isLoggedIn: boolean }>()
+  props<{
+    user: Omit<User, 'password'>
+    isHomePageVisited: boolean
+  }>()
 )
 
 export const editUserData = createAction(
@@ -17,5 +20,5 @@ export const editUserData = createAction(
 
 export const logout = createAction(
   '[User] Logout',
-  props<{ response: string; isLoggedIn: boolean }>()
+  props<{ response: string; isHomePageVisited: boolean }>()
 )
