@@ -20,23 +20,11 @@ import { ProvisionState } from '../../data/NgRx/controller/provision/provisionRe
           *ngIf="isModalDisplay && modalState !== false"
         ></app-home-time-picking>
       </div>
-      <div
-        class="article__titleWrapper"
-        data-aos="fade-up"
-        data-aos-duration="500"
-        data-aos-easing="ease-out"
-        data-aos-offset="500"
-      >
+      <div class="article__titleWrapper">
         <p class="article__titleWrapper__subtitle">{{ subtitle }}</p>
         <h2 class="article__titleWrapper__title">{{ title }}</h2>
       </div>
-      <ul
-        class="article__cardsWrapper"
-        data-aos="fade-up-right"
-        data-aos-duration="500"
-        data-aos-easing="ease-out"
-        data-aos-offset="500"
-      >
+      <ul class="article__cardsWrapper">
         <li
           *ngFor="let prestation of provisions"
           class="article__cardsWrapper__cards"

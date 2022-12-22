@@ -28,7 +28,7 @@ module.exports.connectUser = async (req, res) => {
           httpOnly: true,
           maxAge: cookieMaxAge,
           secure: true,
-          sameSite: 'strict',
+          sameSite: 'none',
         })
 
         const connectedUser = {

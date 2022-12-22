@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import AOS from 'aos'
 
 @Component({
   selector: 'app-authentication',
@@ -24,4 +25,16 @@ import { Component } from '@angular/core'
     '.main__section__article {display: flex; justify-content: center; align-items: center;}',
   ],
 })
-export class AuthenticationComponent {}
+export class AuthenticationComponent implements OnInit {
+  initPackageAOS() {
+    AOS.init({
+      disable: 'mobile',
+    })
+    AOS.refreshHard()
+    AOS.refresh()
+  }
+
+  ngOnInit() {
+    this.initPackageAOS()
+  }
+}

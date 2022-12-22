@@ -23,12 +23,7 @@ import { UserState } from '../../data/NgRx/controller/user/userReducer'
 @Component({
   selector: 'app-home-time-picking',
   template: `
-    <div
-      class="timePickingModal"
-      data-aos="fade-down-left"
-      data-aos-duration="500"
-      data-aos-easing="ease-out"
-    >
+    <div class="timePickingModal">
       <div class="timePickingModal__Wrapper">
         <div class="timePickingModal__Wrapper__titleWrapper">
           <h3 class="timePickingModal__Wrapper__titleWrapper__title">

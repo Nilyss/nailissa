@@ -11,6 +11,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 999;
+  overflow-x: hidden;
   &:before {
     animation: loaderDuration--background 3s linear forwards;
     content: '';
